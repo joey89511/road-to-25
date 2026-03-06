@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan Sanchez — Road to 25</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #242836;
+    --border: #2e3344;
+    --text: #e4e6ed;
+    --text-muted: #8b90a0;
+    --accent: #6c5ce7;
+    --accent-glow: rgba(108, 92, 231, 0.15);
+    --red: #ff6b6b;
+    --orange: #ffa94d;
+    --green: #51cf66;
+    --blue: #339af0;
+    --gold: #ffd43b;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(108, 92, 231, 0.06) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 17, 23, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(46, 51, 68, 0.6);
+    padding: 0 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .nav-brand {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 2rem;
+    white-space: nowrap;
+    padding: 1rem 0;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    flex: 1;
+  }
+  .nav-tab {
+    padding: 1rem 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active {
+    color: #fff;
+    border-bottom-color: var(--accent);
+    text-shadow: 0 0 12px rgba(108, 92, 231, 0.4);
+  }
+  .nav-tab .tab-num {
+    font-size: 0.6rem;
+    opacity: 0.5;
+    margin-right: 0.4rem;
+  }
+
+  /* PAGES */
+  .page {
+    display: none;
+    padding: 2rem 0 4rem;
+    animation: fadeIn 0.3s ease;
+  }
+  .page.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    position: relative;
+  }
+  .page-header::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), rgba(108, 92, 231, 0.3));
+    margin: 1.25rem auto 0;
+    border-radius: 3px;
+  }
+  .page-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .page-title {
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .page-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* HERO (page 1) */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    background: radial-gradient(ellipse at 50% 0%, rgba(108, 92, 231, 0.15) 0%, transparent 70%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(108, 92, 231, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(108, 92, 231, 0.4);
+    padding: 0.4rem 1.5rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    background: rgba(108, 92, 231, 0.08);
+  }
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 0;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .hero-divider {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), rgba(108, 92, 231, 0.3));
+    margin: 1.25rem auto;
+    border-radius: 3px;
+  }
+  .hero-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .hero-meta {
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .kpi-card {
+    background: linear-gradient(145deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .kpi-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(108, 92, 231, 0.3);
+  }
+  .kpi-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .kpi-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+  .kpi-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+  .kpi-sub .up { color: var(--green); font-weight: 600; }
+
+  /* STRENGTH CALLOUT */
+  .strength {
+    background: linear-gradient(135deg, rgba(81, 207, 102, 0.12), rgba(81, 207, 102, 0.03));
+    border: 2px solid rgba(81, 207, 102, 0.4);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+  .strength-label {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--green);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(81, 207, 102, 0.25);
+  }
+  .strength-label::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--green);
+    margin: 0.75rem auto 0;
+    border-radius: 2px;
+  }
+  .strength-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+  .strength-text strong { color: var(--green); font-weight: 800; font-size: 1.3rem; }
+
+  /* VOLUME TRACKER */
+  .volume {
+    background: linear-gradient(145deg, var(--surface), rgba(26, 29, 39, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+  .volume-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+  .volume-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .volume-range {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .volume-weeks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .volume-week {
+    text-align: center;
+    padding: 1.5rem 0.75rem;
+    border-radius: 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .volume-week:hover {
+    transform: translateY(-2px);
+    border-color: rgba(108, 92, 231, 0.3);
+  }
+  .volume-week-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+  .volume-week-dates {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .volume-avg {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .volume-avg-label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+  .volume-total {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+  .volume-total strong { color: var(--text); }
+  .volume-days {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
+  /* POTENTIAL */
+  .potential {
+    background: linear-gradient(145deg, var(--surface), rgba(26, 29, 39, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+  .potential::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--orange), var(--gold), var(--green));
+  }
+  .potential-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .potential-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .potential-basis {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .potential-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .potential-col {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    border-radius: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .potential-col.current {
+    border-color: var(--red);
+    background: rgba(255, 107, 107, 0.06);
+  }
+  .potential-col.current::after {
+    content: 'YOU ARE HERE';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    background: var(--surface);
+    padding: 0 0.5rem;
+    white-space: nowrap;
+  }
+  .potential-col.target {
+    border-color: var(--green);
+    background: rgba(81, 207, 102, 0.06);
+  }
+  .potential-rate {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+  .potential-sales {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .potential-sales-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+  }
+  .potential-premium {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-top: 0.5rem;
+  }
+  .potential-bonus {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+  .potential-bonus strong { color: var(--green); }
+  .potential-insight {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    line-height: 1.6;
+  }
+  .potential-insight strong { color: var(--text); }
+  .potential-insight .highlight-num { color: var(--green); font-weight: 800; font-size: 1rem; }
+
+  /* NEXT PAGE CTA */
+  .next-page {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+  .next-page-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #5a4bd4);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 1rem 3rem;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    box-shadow: 0 4px 16px rgba(108, 92, 231, 0.3);
+  }
+  .next-page-btn:hover {
+    background: linear-gradient(135deg, #7c6ef0, var(--accent));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(108, 92, 231, 0.4);
+  }
+  .next-page-hint {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title.hero-section {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #fff;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1.5rem;
+  }
+  .section-title.hero-section::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    margin: 0.75rem auto 0;
+    border-radius: 2px;
+  }
+
+  /* 80% CALLOUT */
+  .callout-80 {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(255, 107, 107, 0.03));
+    border: 2px solid rgba(255, 107, 107, 0.5);
+    border-radius: 20px;
+    padding: 3.5rem 2rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(255, 107, 107, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .callout-80::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 300px;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .callout-80-number {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 60px rgba(255, 107, 107, 0.4);
+    position: relative;
+  }
+  .callout-80-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 0.75rem;
+    position: relative;
+  }
+
+  /* DIAGNOSIS */
+  .diagnosis {
+    background: linear-gradient(145deg, var(--surface), rgba(26, 29, 39, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .diagnosis::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--orange));
+  }
+  .diagnosis strong { color: #fff; }
+
+  /* YESTERDAY */
+  .yesterday {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .yesterday-stats {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .yesterday-stats strong { color: var(--text); }
+  .yesterday-detail {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+  }
+
+  /* SECTION SCORES */
+  .scores-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .score-pill {
+    background: linear-gradient(145deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .score-pill:hover {
+    transform: translateY(-2px);
+    border-color: rgba(108, 92, 231, 0.3);
+  }
+  .score-pill-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+  .score-pill-value.low { color: var(--red); }
+  .score-pill-value.mid { color: var(--orange); }
+  .score-pill-value.ok { color: var(--gold); }
+  .score-pill-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+  .scores-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  /* DISTRIBUTION BAR */
+  .dist-section {
+    margin: 1.5rem 0;
+    background: linear-gradient(145deg, var(--surface), rgba(26, 29, 39, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .dist-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+  .dist-bar {
+    display: flex;
+    height: 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface2);
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .dist-bar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .dist-needs { background: var(--red); width: 49%; }
+  .dist-dev { background: var(--orange); width: 32%; }
+  .dist-strong { background: var(--blue); width: 8%; }
+  .dist-elite { background: var(--green); width: 0%; min-width: 0; }
+  .dist-legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    justify-content: center;
+  }
+  .dist-legend span::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 0.4rem;
+    vertical-align: middle;
+  }
+  .legend-needs::before { background: var(--red); }
+  .legend-dev::before { background: var(--orange); }
+  .legend-strong::before { background: var(--blue); }
+  .legend-elite::before { background: var(--green); }
+
+  /* PLAYBOOK */
+  .playbook-card {
+    background: linear-gradient(145deg, var(--surface), rgba(26, 29, 39, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .playbook-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(108, 92, 231, 0.2);
+  }
+  .playbook-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+  }
+  /* Collapsible playbook */
+  .playbook-card .playbook-body { display: block; }
+  .playbook-card.collapsed .playbook-body { display: none; }
+  .playbook-card.collapsed { padding: 1.25rem 2rem; cursor: pointer; opacity: 0.7; }
+  .playbook-card.collapsed:hover { opacity: 1; }
+  .playbook-toggle {
+    display: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-left: auto;
+    padding-left: 1rem;
+  }
+  .playbook-card.collapsed .playbook-toggle { display: inline; }
+  .playbook-card.discovery::before { background: var(--red); }
+  .playbook-card.value::before { background: var(--orange); }
+  .playbook-card.objections::before { background: var(--gold); }
+  .playbook-card.closing::before { background: var(--blue); }
+  .playbook-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .playbook-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .playbook-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-left: 0.75rem;
+    flex: 1;
+  }
+  .playbook-score {
+    font-size: 1.3rem;
+    font-weight: 800;
+  }
+  .playbook-score.low { color: var(--red); }
+  .playbook-score.mid { color: var(--orange); }
+  .playbook-score.ok { color: var(--gold); }
+  .playbook-best {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+  }
+  .playbook-gap {
+    background: rgba(255, 107, 107, 0.08);
+    border-left: 3px solid var(--red);
+    padding: 0.75rem 1rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .playbook-gap strong { color: var(--red); }
+  .playbook-target {
+    background: rgba(81, 207, 102, 0.08);
+    border-left: 3px solid var(--green);
+    padding: 0.75rem 1rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .playbook-target strong { color: var(--green); }
+  .playbook-script {
+    background: rgba(108, 92, 231, 0.06);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    border: 1px solid rgba(108, 92, 231, 0.15);
+    color: #d4d6e0;
+  }
+  .playbook-proof {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .playbook-proof strong { color: var(--green); font-weight: 700; }
+
+  /* OBJECTION SCRIPTS */
+  .obj-scripts {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .obj-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    background: linear-gradient(145deg, var(--surface2), rgba(36, 40, 54, 0.8));
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .obj-row:hover {
+    transform: translateY(-1px);
+    border-color: rgba(108, 92, 231, 0.2);
+  }
+  .obj-trigger {
+    color: var(--red);
+    font-weight: 700;
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
+  .obj-response {
+    color: #c3c7d4;
+    font-style: italic;
+  }
+
+  /* GO GET IT */
+  .gogogo {
+    background: linear-gradient(135deg, var(--accent), #4834d4, #3b2db0);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(108, 92, 231, 0.3);
+  }
+  .gogogo::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .gogogo::after {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .gogogo-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+  .gogogo-focus {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+  .gogogo-question {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .gogogo-sub {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .gogogo-responses {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    text-align: left;
+  }
+  .gogogo-resp {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .gogogo-resp:hover {
+    transform: translateY(-2px);
+    background: rgba(255,255,255,0.14);
+  }
+  .gogogo-resp-trigger {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    margin-bottom: 0.4rem;
+  }
+  .gogogo-resp-action {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .gogogo-resp-script {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    font-style: italic;
+  }
+
+  /* BONUS TABLE */
+  .bonus-section {
+    margin: 1.5rem 0;
+    background: linear-gradient(145deg, var(--surface), rgba(26, 29, 39, 0.8));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .bonus-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .bonus-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .bonus-card.highlight {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, var(--surface2), rgba(255, 212, 59, 0.08));
+    box-shadow: 0 0 20px rgba(255, 212, 59, 0.1);
+  }
+  .bonus-amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gold);
+  }
+  .bonus-hh {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 0.25rem;
+  }
+  .bonus-pace {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+  .bonus-note {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+  .bonus-note strong { color: var(--text); }
+
+  /* CLOSING */
+  .closing {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+  }
+  .closing-line1 {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .closing-names {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    text-shadow: 0 0 30px rgba(108, 92, 231, 0.25);
+  }
+  .closing-cta {
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .scores-grid { grid-template-columns: repeat(2, 1fr); }
+    .bonus-grid { grid-template-columns: repeat(2, 1fr); }
+    .gogogo-responses { grid-template-columns: 1fr; }
+    .potential-grid { grid-template-columns: repeat(2, 1fr); }
+    .volume-weeks { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .gogogo-question { font-size: 1.2rem; }
+    .nav-tabs { overflow-x: auto; }
+    .nav-tab { padding: 1rem 0.75rem; font-size: 0.7rem; }
+    .nav-brand { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<div class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">Road to 25</div>
+    <div class="nav-tabs">
+      <div class="nav-tab active" data-page="1"><span class="tab-num">1</span>What You Do Well</div>
+      <div class="nav-tab" data-page="2"><span class="tab-num">2</span>Where to Grow</div>
+      <div class="nav-tab" data-page="3"><span class="tab-num">3</span>Your Playbook</div>
+      <div class="nav-tab" data-page="4"><span class="tab-num">4</span>Go Get It</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PAGE 1: WHAT YOU DO WELL                    -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="page active" data-page="1">
+
+    <div class="hero">
+      <div class="hero-label">Road to 25</div>
+      <h1>Jonathan Sanchez</h1>
+      <div class="hero-divider"></div>
+      <div class="hero-sub">Weekly Coaching Report</div>
+      <div class="hero-meta">March 4, 2026 &middot; Week 3</div>
+    </div>
+
+    <!-- STRENGTH -->
+    <div class="strength">
+      <div class="strength-label">Your Superpower</div>
+      <div class="strength-text">
+        You get people on the phone and they stay on the phone.<br>
+        You work hard, and it shows &mdash; your quote volume is consistently strong.<br>
+        <strong>Most agents wish they had your pipeline.</strong>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="volume" style="margin-top:1.5rem;">
+      <div class="section-title hero-section" style="margin-bottom:0.5rem;">Where You Stand</div>
+      <div style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-bottom:1.25rem;">Last month's results &middot; February 2026</div>
+    <div class="kpi-grid" style="margin:0;">
+      <div class="kpi-card">
+        <div class="kpi-value" style="color: var(--orange);">12.0<span style="font-size:0.9rem;color:var(--text-muted);font-weight:500;"> / 25</span></div>
+        <div class="kpi-label">This Week's Avg Score</div>
+        <div class="kpi-sub"><span class="up">&uarr; up from 9.3 last week</span></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" style="color: var(--blue);">16<span style="font-size:0.9rem;color:var(--text-muted);font-weight:500;"> / 25</span></div>
+        <div class="kpi-label">Best Single Call</div>
+        <div class="kpi-sub">Yolanda Bogan</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" style="color: var(--red);">7%</div>
+        <div class="kpi-label">Close Rate</div>
+        <div class="kpi-sub">Goal: 15%+</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" style="color: var(--red);">1</div>
+        <div class="kpi-label">Sales Per Day</div>
+        <div class="kpi-sub">Goal: 2+</div>
+      </div>
+    </div>
+    </div>
+
+    <!-- VOLUME -->
+    <div class="volume">
+      <div class="section-title hero-section" style="margin-bottom:0.5rem;">Keep Your Powers Strong</div>
+      <div style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-bottom:1.25rem;">Daily quote volume &middot; 2/22/26 &ndash; Current</div>
+      <div class="volume-weeks">
+        <div class="volume-week">
+          <div class="volume-week-label">Week 1</div>
+          <div class="volume-week-dates">2/23 &ndash; 2/27</div>
+          <div class="volume-avg" style="color: var(--blue);">12.4</div>
+          <div class="volume-avg-label">quotes / day</div>
+          <div class="volume-total"><strong>62</strong> total</div>
+          <div class="volume-days">5 days</div>
+        </div>
+        <div class="volume-week">
+          <div class="volume-week-label">Week 2</div>
+          <div class="volume-week-dates">3/2</div>
+          <div class="volume-avg" style="color: var(--green);">13.0</div>
+          <div class="volume-avg-label">quotes / day</div>
+          <div class="volume-total"><strong>13</strong> total</div>
+          <div class="volume-days">1 day</div>
+        </div>
+        <div class="volume-week">
+          <div class="volume-week-label">Overall</div>
+          <div class="volume-week-dates">6 days tracked</div>
+          <div class="volume-avg" style="color: var(--accent);">12.5</div>
+          <div class="volume-avg-label">quotes / day</div>
+          <div class="volume-total"><strong>75</strong> total</div>
+          <div class="volume-days">Consistent volume</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-page">
+      <button class="next-page-btn" onclick="goToPage(2)">Next: Where to Grow &rarr;</button>
+      <div class="next-page-hint">Page 1 of 4</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PAGE 2: WHERE TO GROW                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="page" data-page="2">
+
+    <div class="page-header">
+      <div class="page-title">Where to Grow</div>
+      <div class="page-subtitle">You have the volume. Now let's turn quotes into sales.</div>
+    </div>
+
+    <!-- THE BIG NUMBER -->
+    <div class="callout-80">
+      <div class="callout-80-number">80%</div>
+      <div class="callout-80-text">of your calls end before you ever attempt a close.</div>
+    </div>
+
+    <!-- DIAGNOSIS -->
+    <div class="diagnosis">
+      The gap isn't getting people on the phone &mdash; you're already elite at that. The gap is <strong>what happens between the quote and the sale</strong>. You quote 12+ people a day and close less than 1. The skills below are what separate quoting from closing.
+    </div>
+
+    <!-- SECTION SCORES -->
+    <div class="section-title" style="text-align:center; border-bottom:none;">Your Section Scores &mdash; How Each Sales Skill Is Graded (out of 5)</div>
+    <div class="scores-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 500px; margin: 0 auto 0.75rem;">
+      <div class="score-pill">
+        <div class="score-pill-value mid">2.4<span style="font-size:0.7rem;color:var(--text-muted);font-weight:500;"> / 5</span></div>
+        <div class="score-pill-label">Objection Handling</div>
+      </div>
+      <div class="score-pill">
+        <div class="score-pill-value ok">3.0<span style="font-size:0.7rem;color:var(--text-muted);font-weight:500;"> / 5</span></div>
+        <div class="score-pill-label">Closing</div>
+      </div>
+    </div>
+    <div class="scores-note">3 = meets baseline &middot; 4 = advanced attempt &middot; 5 = elite execution</div>
+
+    <!-- CALL DISTRIBUTION -->
+    <div class="dist-section">
+      <div class="dist-label">How Your Calls Break Down by Score Tier</div>
+      <div class="dist-bar">
+        <div class="dist-needs">49%</div>
+        <div class="dist-dev">32%</div>
+        <div class="dist-strong">8%</div>
+        <div class="dist-elite"></div>
+      </div>
+      <div class="dist-legend">
+        <span class="legend-needs">Needs Improvement 49%</span>
+        <span class="legend-dev">Developing 32%</span>
+        <span class="legend-strong">Strong 8%</span>
+        <span class="legend-elite">Elite 0%</span>
+      </div>
+    </div>
+
+    <div class="next-page">
+      <button class="next-page-btn" onclick="goToPage(3)">Next: Your Playbook &rarr;</button>
+      <div class="next-page-hint">Page 2 of 4</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PAGE 3: YOUR PLAYBOOK                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="page" data-page="3">
+
+    <div class="page-header">
+      <div class="page-title">Your Playbook</div>
+      <div class="page-subtitle">What a perfect score looks like in each section &mdash; and the exact words to get there.</div>
+    </div>
+
+    <!-- 01 Takeover (collapsed) -->
+    <div class="playbook-card discovery collapsed" onclick="this.classList.toggle('collapsed')">
+      <div class="playbook-header">
+        <span class="playbook-num">01</span>
+        <span class="playbook-name">Transfer Takeover</span>
+        <span class="playbook-score mid">—<span style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></span>
+        <span class="playbook-toggle">CLICK TO EXPAND</span>
+      </div>
+      <div class="playbook-body">
+      <div class="playbook-gap">
+        <strong>The gap:</strong> Sometimes misses referencing the customer's reason for shopping in the first 30 seconds.
+      </div>
+      <div class="playbook-target">
+        <strong>A 5:</strong> Seamless takeover &mdash; greet by name, confirm key details, respond to their reason for shopping, and ask if they're ready to switch today. Zero friction from the first word.
+      </div>
+      <div class="playbook-script">
+        "Hey [Name], I see you came in looking at [vehicle]. Sounds like you're shopping because [reason]. If I can get you a better rate today, are you looking to make the switch?"
+      </div>
+      <div class="playbook-proof">
+        <strong>PROOF:</strong> Dennis Cruz &mdash; smooth takeover, confirmed details without making him repeat anything.
+      </div>
+      </div>
+    </div>
+
+    <!-- 02 Discovery (collapsed) -->
+    <div class="playbook-card value collapsed" onclick="this.classList.toggle('collapsed')">
+      <div class="playbook-header">
+        <span class="playbook-num">02</span>
+        <span class="playbook-name">Needs Discovery</span>
+        <span class="playbook-score low">2.1<span style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"> / 5</span></span>
+        <span class="playbook-toggle">CLICK TO EXPAND</span>
+      </div>
+      <div class="playbook-body">
+      <div class="playbook-gap">
+        <strong>The gap:</strong> You jump to quoting after 1-2 questions. No customer profile = no savings story = no close.
+      </div>
+      <div class="playbook-target">
+        <strong>A 5:</strong> Full consultative household review. Ask about auto details, rent/own, other drivers, current carrier, budget. Uncover stated AND unstated needs &mdash; identify renters and offer it without being asked. Plant life seeds. Use the customer's own words later in the call.
+      </div>
+      <div class="playbook-script">
+        "Before I put anything together, let me ask a few quick questions. What are you currently paying? Is it just you on the policy? Do you rent or own? Any tickets or accidents I should know about?"
+      </div>
+      <div class="playbook-proof">
+        <strong>PROOF:</strong> Dennis Cruz &mdash; you asked what he paid ($278), found his renters, built the full picture. That scored 21/25.
+      </div>
+      </div>
+    </div>
+
+    <!-- 03 Value Presentation (collapsed) -->
+    <div class="playbook-card objections collapsed" onclick="this.classList.toggle('collapsed')">
+      <div class="playbook-header">
+        <span class="playbook-num">03</span>
+        <span class="playbook-name">Value Presentation</span>
+        <span class="playbook-score low">2.3<span style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"> / 5</span></span>
+        <span class="playbook-toggle">CLICK TO EXPAND</span>
+      </div>
+      <div class="playbook-body">
+      <div class="playbook-gap">
+        <strong>The gap:</strong> One price, no anchor, no options. Customer says no &rarr; dead end.
+      </div>
+      <div class="playbook-target">
+        <strong>A 5:</strong> Use the customer's own words and situation. Present total financial picture: single-line cost vs. multi-policy bundle savings. Good/better/best options. Address why they started shopping and frame the switching decision.
+      </div>
+      <div class="playbook-script">
+        "You're paying $278 with State Farm. I have you at $187 &mdash; that's $91 a month, over $1,000 a year. Bundle renters for $15 and I drop auto another $40. You're saving $131/month and fully protected."
+      </div>
+      <div class="playbook-proof">
+        <strong>PROOF:</strong> Harold Carter &mdash; multi-car discovery, renters pivot, $303 down to $243. He bought because you stacked the value.
+      </div>
+      </div>
+    </div>
+
+    <!-- 04 Objection Handling (EXPANDED - FOCUS) -->
+    <div class="playbook-card objections" style="border-color: rgba(255, 212, 59, 0.4);">
+      <div class="playbook-header">
+        <span class="playbook-num" style="color:var(--gold);">04 &mdash; FOCUS</span>
+        <span class="playbook-name">Objection Handling</span>
+        <span class="playbook-score mid">2.4<span style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"> / 5</span></span>
+        <span class="playbook-best">best: 4 (Yolanda Bogan)</span>
+      </div>
+      <div class="playbook-body">
+      <div class="playbook-gap">
+        <strong>The gap:</strong> When customers push back, you accept it. The call ends one question too early. You don't preemptively frame value to prevent objections.
+      </div>
+      <div class="playbook-target">
+        <strong>A 5:</strong> Preemptively frame value so the customer accepts it without objection. When they still push back, respond with a multi-layered rebuttal using details they shared earlier, reframe around their situation, and transition directly into a close attempt.
+      </div>
+      <div class="obj-scripts">
+        <div class="obj-row">
+          <span class="obj-trigger">"Let me think about it"</span>
+          <span class="obj-response">"Totally understand. Is it the price, or something else I can adjust? This rate is locked in today &mdash; I can't guarantee it tomorrow."</span>
+        </div>
+        <div class="obj-row">
+          <span class="obj-trigger">"No thank you"</span>
+          <span class="obj-response">"Before you go &mdash; what are you paying now? I want to make sure you're not leaving money on the table."</span>
+        </div>
+        <div class="obj-row">
+          <span class="obj-trigger">"I'm shopping around"</span>
+          <span class="obj-response">"I get it. This rate is competitive right now. If rates go up next week, this price is gone. Let me lock it in for you today."</span>
+        </div>
+        <div class="obj-row">
+          <span class="obj-trigger">"Talk to my spouse"</span>
+          <span class="obj-response">"That's smart. I'll put together a summary showing the savings and hold this rate for 24 hours so you don't lose it."</span>
+        </div>
+      </div>
+      <div class="playbook-proof">
+        <strong>PROOF:</strong> Rosher &mdash; "I know your insurance expires in two days, let's get this set up." That closed $2,160. You used urgency and their own situation to overcome hesitation.
+      </div>
+      </div>
+    </div>
+
+    <!-- 05 Closing (EXPANDED - FOCUS) -->
+    <div class="playbook-card closing" style="border-color: rgba(51, 154, 240, 0.4);">
+      <div class="playbook-header">
+        <span class="playbook-num" style="color:var(--blue);">05 &mdash; FOCUS</span>
+        <span class="playbook-name">Closing</span>
+        <span class="playbook-score ok">3.0<span style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"> / 5</span></span>
+      </div>
+      <div class="playbook-body">
+      <div class="playbook-gap">
+        <strong>The gap:</strong> 80% of calls end before you try to close. You don't transition to the close unless the customer does it for you. No trial closes throughout the call.
+      </div>
+      <div class="playbook-target">
+        <strong>A 5:</strong> Closing feels like the natural end of a consultation. Use trial closes throughout the call, not just at the end. Present bind-now and bind-later options. Close on auto AND at least one additional line. Ask to save your number, opt into texts, and send a confirmation text.
+      </div>
+      <div class="playbook-script">
+        "You're saving [amount] a month with better coverage. I can have your ID cards in your inbox in 10 minutes. Would you like to use a card or bank account?"
+      </div>
+      <div class="playbook-gap" style="margin-top:0.75rem;">
+        <strong>Trial close examples to use throughout:</strong> "If I can beat what you're paying, would you be ready to switch today?" &mdash; "Does this coverage sound like what you need?" &mdash; "So far so good?"
+      </div>
+      <div class="playbook-proof">
+        <strong>PROOF:</strong> Harold Carter &mdash; the full close + post-sale walkthrough. Used assumptive close, recapped savings, and walked through next steps. That's the template for every call.
+      </div>
+      </div>
+    </div>
+
+    <div class="next-page">
+      <button class="next-page-btn" onclick="goToPage(4)">Next: Go Get It &rarr;</button>
+      <div class="next-page-hint">Page 3 of 4</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PAGE 4: GO GET IT                           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="page" data-page="4">
+
+    <div class="page-header" style="padding-bottom:0.5rem;">
+      <div class="page-title">Go Get It</div>
+      <div class="page-subtitle" style="margin-bottom:0.5rem;"><span style="text-decoration:underline;">The skill is there:</span> <span style="color:var(--accent);font-weight:700;">Harold. Rosher. Dennis. Rafael.</span><br><span style="text-decoration:underline;">Now make it every call.</span></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="gogogo">
+      <div class="gogogo-label">One Focus. One Question. Every Call.</div>
+      <div class="gogogo-question">
+        "What would it take for you to<br>move forward with this today?"
+      </div>
+      <div class="gogogo-sub">Then solve what they give you</div>
+      <div class="gogogo-responses">
+        <div class="gogogo-resp">
+          <div class="gogogo-resp-trigger">They say: Price</div>
+          <div class="gogogo-resp-action">Reframe for value.</div>
+          <div class="gogogo-resp-script">"I hear you &mdash; but you're getting [coverage they don't have now] plus [savings/bundle benefit]. That's $[X] more protection for $[Y] less. What part feels off?"</div>
+        </div>
+        <div class="gogogo-resp">
+          <div class="gogogo-resp-trigger">They say: Shopping</div>
+          <div class="gogogo-resp-action">Create urgency.</div>
+          <div class="gogogo-resp-script">"This rate won't last &mdash; let me lock it in."</div>
+        </div>
+        <div class="gogogo-resp">
+          <div class="gogogo-resp-trigger">They say: Thinking</div>
+          <div class="gogogo-resp-action">State annual savings.</div>
+          <div class="gogogo-resp-script">"That's $1,000 you keep."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POTENTIAL -->
+    <div class="potential">
+      <div class="potential-header">
+        <span class="potential-title">What's Possible at Your Current Volume</span>
+        <span class="potential-basis">Based on ~12 quotes/day &middot; 22 working days</span>
+      </div>
+      <div class="potential-grid">
+        <div class="potential-col current">
+          <div class="potential-rate">Now ~7%</div>
+          <div class="potential-sales" style="color: var(--red);">5</div>
+          <div class="potential-sales-label">HH / mo</div>
+          <div class="potential-premium">$4,707</div>
+          <div class="potential-bonus">No bonus</div>
+        </div>
+        <div class="potential-col">
+          <div class="potential-rate">Close 10%</div>
+          <div class="potential-sales" style="color: var(--orange);">26</div>
+          <div class="potential-sales-label">HH / mo</div>
+          <div class="potential-premium">$28,000+</div>
+          <div class="potential-bonus"><strong>$1,000 bonus</strong></div>
+        </div>
+        <div class="potential-col target">
+          <div class="potential-rate">Close 15%</div>
+          <div class="potential-sales" style="color: var(--green);">40</div>
+          <div class="potential-sales-label">HH / mo</div>
+          <div class="potential-premium">$43,000+</div>
+          <div class="potential-bonus"><strong>$2,000 bonus</strong></div>
+        </div>
+        <div class="potential-col">
+          <div class="potential-rate">Close 20%</div>
+          <div class="potential-sales" style="color: var(--gold);">53</div>
+          <div class="potential-sales-label">HH / mo</div>
+          <div class="potential-premium">$57,000+</div>
+          <div class="potential-bonus"><strong>$5,000 bonus</strong></div>
+        </div>
+      </div>
+      <div class="potential-insight">
+        You already talk to <strong>12+ people a day</strong>. Most agents don't get that volume.<br>
+        Closing just <span class="highlight-num">2 more per day</span> puts you at 40 HH and a <strong>$2,000 bonus</strong> &mdash; with the same number of calls.
+      </div>
+    </div>
+
+    <!-- MARCH BONUS -->
+    <div class="bonus-section">
+      <div class="section-title" style="text-align:center; border-bottom:none;">March Bonus Tiers</div>
+      <div class="bonus-grid">
+        <div class="bonus-card">
+          <div class="bonus-amount">$500</div>
+          <div class="bonus-hh">20 HH</div>
+          <div class="bonus-pace">~1/day</div>
+        </div>
+        <div class="bonus-card">
+          <div class="bonus-amount">$1,000</div>
+          <div class="bonus-hh">30 HH</div>
+          <div class="bonus-pace">~1.5/day</div>
+        </div>
+        <div class="bonus-card highlight">
+          <div class="bonus-amount">$2,000</div>
+          <div class="bonus-hh">40 HH</div>
+          <div class="bonus-pace">~2/day</div>
+        </div>
+        <div class="bonus-card">
+          <div class="bonus-amount">$5,000</div>
+          <div class="bonus-hh">50 HH</div>
+          <div class="bonus-pace">~2.5/day</div>
+        </div>
+      </div>
+      <div class="bonus-note">
+        You quote 11-14 per day. Close <strong>2 more</strong> and Tier 3 is yours.<br>
+        Feb: 5 HH, $4,707 premium. March: let's double it.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function goToPage(num) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.page[data-page="${num}"]`).classList.add('active');
+  document.querySelector(`.nav-tab[data-page="${num}"]`).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => goToPage(tab.dataset.page));
+});
+</script>
+
+</body>
+</html>
