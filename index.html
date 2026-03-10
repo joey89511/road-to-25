@@ -13,21 +13,44 @@
     background: #0f1117;
     color: #e4e6ed;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  .loading { text-align: center; }
-  .loading h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-  .loading p { color: #8b90a0; font-size: 0.85rem; margin-top: 0.5rem; }
-  .error { text-align: center; color: #ff6b6b; max-width: 500px; padding: 2rem; }
+
+  /* ── Tabs ──────────────────────────────────────── */
+  .tab-bar {
+    display: flex;
+    background: #1a1d27;
+    border-bottom: 1px solid #2e3344;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    color: #8b90a0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: #e4e6ed; background: rgba(99, 102, 241, 0.05); }
+  .tab-btn.active { color: #6366f1; border-bottom-color: #6366f1; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── Loading / Error ───────────────────────────── */
+  .loading, .error, .picker { text-align: center; padding: 2rem; }
+  .loading h2, .picker h1 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff; }
+  .loading p, .picker .sub { color: #8b90a0; font-size: 0.85rem; margin-top: 0.5rem; }
+  .error { color: #ff6b6b; max-width: 500px; margin: 0 auto; }
   .error h2 { margin-bottom: 0.5rem; }
   .error p { color: #8b90a0; font-size: 0.85rem; margin-top: 0.5rem; }
   .error code { background: #1a1d27; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; color: #ffa94d; }
-  .picker { text-align: center; max-width: 500px; padding: 2rem; }
-  .picker h1 { font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; color: #fff; }
-  .picker .sub { color: #8b90a0; margin-bottom: 2rem; }
-  .cards { display: grid; gap: 1rem; }
+  .cards { display: grid; gap: 1rem; max-width: 500px; margin: 0 auto; }
   .cards a {
     display: block;
     background: linear-gradient(145deg, #1a1d27, #242836);
@@ -45,6 +68,162 @@
     transform: translateY(-2px);
     border-color: rgba(108, 92, 231, 0.4);
     box-shadow: 0 4px 20px rgba(108, 92, 231, 0.15);
+  }
+
+  /* ── Coaching iframe ──────────────────────────── */
+  .coaching-frame {
+    width: 100%;
+    border: none;
+    min-height: calc(100vh - 50px);
+  }
+
+  /* ── Bingo Board ──────────────────────────────── */
+  .bingo-wrap { padding: 16px; max-width: 600px; margin: 0 auto; }
+  .bingo-wrap h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
+  .bingo-status { font-size: 13px; color: #8b90a0; margin-bottom: 16px; }
+
+  .bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .bingo-cell {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px 4px;
+    border: 2px solid #2e3344;
+    border-radius: 10px;
+    background: #1a1d27;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .bingo-icon { font-size: 16px; margin-bottom: 2px; }
+  .bingo-label { font-size: 10px; line-height: 1.2; word-break: break-word; }
+  .bingo-progress { font-size: 9px; color: #8b90a0; margin-top: 2px; }
+  .bingo-section-badge {
+    position: absolute;
+    top: 3px; right: 3px;
+    font-size: 8px;
+    color: #6366f1;
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .bingo-unmarked { border-color: #6366f1; cursor: pointer; }
+  .bingo-unmarked:hover { background: rgba(99, 102, 241, 0.1); transform: scale(1.03); }
+  .bingo-pending { border-color: #eab308; background: rgba(234, 179, 8, 0.08); }
+  .bingo-pending .bingo-icon { color: #eab308; }
+  .bingo-verified { border-color: #22c55e; background: rgba(34, 197, 94, 0.08); }
+  .bingo-verified .bingo-icon { color: #22c55e; }
+  .bingo-flagged { border-color: #ef4444; background: rgba(239, 68, 68, 0.08); }
+  .bingo-flagged .bingo-icon { color: #ef4444; }
+  .bingo-free { border-color: #22c55e; background: rgba(34, 197, 94, 0.12); }
+  .bingo-free .bingo-icon { color: #22c55e; }
+  .bingo-line { box-shadow: 0 0 0 3px #22c55e, 0 0 12px rgba(34, 197, 94, 0.3); }
+
+  .bingo-winner-banner {
+    text-align: center;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(99, 102, 241, 0.15));
+    border: 2px solid #22c55e;
+    border-radius: 12px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #22c55e;
+    margin-bottom: 16px;
+  }
+
+  .bingo-legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    color: #8b90a0;
+  }
+  .bingo-legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* ── Note Modal ───────────────────────────────── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: #1a1d27;
+    border: 1px solid #2e3344;
+    border-radius: 14px;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+  }
+  .modal-box h3 { margin-bottom: 12px; font-size: 1.1rem; }
+  .modal-box textarea {
+    width: 100%;
+    background: #0f1117;
+    border: 1px solid #2e3344;
+    border-radius: 8px;
+    padding: 10px;
+    color: #e4e6ed;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    margin-bottom: 12px;
+  }
+  .modal-box textarea:focus { outline: none; border-color: #6366f1; }
+  .modal-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+  }
+  .modal-btn-primary { background: #6366f1; color: #fff; }
+  .modal-btn-primary:hover { background: #5558e6; }
+  .modal-btn-secondary { background: #2e3344; color: #8b90a0; }
+  .modal-btn-secondary:hover { background: #3a3f55; }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #22c55e;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 300;
+    animation: fadeInOut 2.5s ease;
+  }
+  .toast.error { background: #ef4444; }
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
   }
 </style>
 </head>
@@ -66,6 +245,26 @@
   <div class="cards" id="picker-cards"></div>
 </div>
 
+<!-- Main tabbed view (shown after identity resolved) -->
+<div id="main-view" style="display:none;">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('coaching')">My Coaching Report</button>
+    <button class="tab-btn" onclick="switchTab('bingo')">Sales Bingo</button>
+  </div>
+  <div id="tab-coaching" class="tab-content active"></div>
+  <div id="tab-bingo" class="tab-content"></div>
+</div>
+
+<!-- Note modal -->
+<div class="modal-overlay" id="note-modal">
+  <div class="modal-box">
+    <h3>Claim Square</h3>
+    <p style="font-size: 13px; color: #8b90a0; margin-bottom: 12px;">This square requires a note to verify your claim.</p>
+    <textarea id="note-input" rows="3" placeholder=""></textarea>
+    <button class="modal-btn modal-btn-primary" onclick="submitNote()">Submit Claim</button>
+    <button class="modal-btn modal-btn-secondary" onclick="closeNoteModal()">Cancel</button>
+  </div>
+</div>
 
 <script>
 const AGENTS = {
@@ -80,9 +279,49 @@ const MANAGERS = [
   'jamesryan@carsonvalley.onmicrosoft.com',
 ];
 
-function showReport(file) {
-  // Navigate directly to the report instead of using an iframe
-  window.location.href = './' + file;
+let currentAgent = null;
+let currentBoard = null;
+let bingoTimer = null;
+let pendingNotePosition = null;
+
+// ── Tab switching ───────────────────────────────────
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(tab === 'coaching' ? 'coaching' : 'bingo')));
+  document.getElementById('tab-coaching').classList.toggle('active', tab === 'coaching');
+  document.getElementById('tab-bingo').classList.toggle('active', tab === 'bingo');
+  if (tab === 'bingo' && currentAgent) loadBingoBoard();
+}
+
+function switchToCoachingSection(section) {
+  switchTab('coaching');
+  // The coaching report iframe should scroll to the section anchor
+  const iframe = document.querySelector('.coaching-frame');
+  if (iframe) {
+    try { iframe.contentWindow.location.hash = section; } catch {}
+  }
+}
+
+// ── Identity ────────────────────────────────────────
+
+function showReport(agentName, file) {
+  currentAgent = agentName;
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('error').style.display = 'none';
+  document.getElementById('picker').style.display = 'none';
+  document.getElementById('main-view').style.display = 'block';
+
+  // Load coaching report in tab 1
+  document.getElementById('tab-coaching').innerHTML =
+    `<iframe class="coaching-frame" src="./${file}"></iframe>`;
+
+  // Load bingo in tab 2
+  document.getElementById('tab-bingo').innerHTML = '<div class="bingo-wrap"><div class="loading"><h2>Loading bingo...</h2></div></div>';
+  loadBingoBoard();
+
+  // Poll bingo every 60s
+  if (bingoTimer) clearInterval(bingoTimer);
+  bingoTimer = setInterval(loadBingoBoard, 60000);
 }
 
 function showPicker(agents) {
@@ -94,7 +333,7 @@ function showPicker(agents) {
   agents.forEach(a => {
     const link = document.createElement('a');
     link.textContent = a.name;
-    link.href = './' + a.file;
+    link.onclick = () => showReport(a.name, a.file);
     cards.appendChild(link);
   });
   picker.style.display = 'block';
@@ -118,7 +357,7 @@ function identifyUser(email) {
   if (isManager) {
     showPicker(Object.values(AGENTS));
   } else if (agentInfo) {
-    showReport(agentInfo[1].file);
+    showReport(agentInfo[1].name, agentInfo[1].file);
   } else {
     showError(
       'No coaching report found for your account.<br>' +
@@ -128,8 +367,125 @@ function identifyUser(email) {
   }
 }
 
+// ── Bingo Board ─────────────────────────────────────
+
+async function loadBingoBoard() {
+  const container = document.getElementById('tab-bingo');
+  if (!container) return;
+  container.innerHTML = '<div class="bingo-wrap" style="padding:0;max-width:100%;">' +
+    '<iframe src="https://joey89511.github.io/salestank-bingo/" ' +
+    'style="width:100%;border:none;min-height:calc(100vh - 50px);background:#0f1117;" ' +
+    'title="Sales Bingo"></iframe></div>';
+}
+
+function renderBingoBoard(container, board) {
+  const marked = board.myState?.marked || {};
+  const progress = board.criteriaProgress || {};
+  const verifiedCount = Object.values(marked).filter(m => ['verified', 'auto', 'free'].includes(m.status)).length;
+
+  let html = `<div class="bingo-wrap">
+    <h2>${escapeH(board.name)}</h2>
+    <div class="bingo-status">${verifiedCount}/25 verified</div>`;
+
+  // Winner banner
+  if (board.winner) {
+    const isMe = !!board.bingo;
+    html += `<div class="bingo-winner-banner">${isMe ? 'YOU GOT BINGO!' : `${escapeH(board.winner.agent)} got BINGO!`}</div>`;
+  } else if (board.bingo) {
+    html += `<div class="bingo-winner-banner">BINGO! You got 5 in a row!</div>`;
+  }
+
+  html += '<div class="bingo-grid">';
+
+  for (let i = 0; i < 25; i++) {
+    const sq = board.squares.find(s => s.position === i);
+    if (!sq) { html += '<div class="bingo-cell"></div>'; continue; }
+
+    const mark = marked[String(i)];
+    const status = mark?.status || null;
+    const cp = progress[String(i)];
+
+    let cls = 'bingo-cell';
+    let icon = '';
+    let clickable = false;
+
+    if (sq.type === 'free') {
+      cls += ' bingo-free';
+      icon = '&#9733;';
+    } else if (status === 'verified' || status === 'auto') {
+      cls += ' bingo-verified';
+      icon = '&#10003;';
+    } else if (status === 'pending') {
+      cls += ' bingo-pending';
+      icon = '&#9203;';
+    } else if (status === 'flagged') {
+      cls += ' bingo-flagged';
+      icon = '&#9888;';
+    } else {
+      // All unmarked squares are clickable
+      cls += ' bingo-unmarked';
+      clickable = true;
+    }
+
+    if (board.bingo && board.bingo.includes(i)) cls += ' bingo-line';
+
+    const onclick = clickable ? ` onclick="claimSquare(${i})"` : '';
+
+    let progressLabel = '';
+    if (cp && !status) {
+      const actual = Math.round(cp.actual * 10) / 10;
+      progressLabel = `<span class="bingo-progress">${actual}/${cp.needed}</span>`;
+    }
+
+    // Section deep-link
+    let sectionBadge = '';
+    if (sq.section) {
+      sectionBadge = `<span class="bingo-section-badge" onclick="event.stopPropagation(); switchToCoachingSection('${sq.section}')">${sq.section.toUpperCase()}</span>`;
+    }
+
+    html += `<div class="${cls}"${onclick}>
+      <span class="bingo-icon">${icon}</span>
+      <span class="bingo-label">${escapeH(sq.label)}</span>
+      ${progressLabel}
+      ${sectionBadge}
+    </div>`;
+  }
+
+  html += '</div>';
+
+  // Legend
+  html += `<div class="bingo-legend">
+    <span><span class="bingo-legend-dot" style="background: #6366f1;"></span>Tap to claim</span>
+    <span><span class="bingo-legend-dot" style="background: #eab308;"></span>Pending review</span>
+    <span><span class="bingo-legend-dot" style="background: #22c55e;"></span>Verified</span>
+    <span><span class="bingo-legend-dot" style="background: #ef4444;"></span>Not verified</span>
+  </div>`;
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ── Claim & Note ────────────────────────────────────
+
+function escapeH(s) {
+  const d = document.createElement('div');
+  d.textContent = s || '';
+  return d.innerHTML;
+}
+
+function showToast(msg, isError) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const el = document.createElement('div');
+  el.className = 'toast' + (isError ? ' error' : '');
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2500);
+}
+
+// ── Init ─────────────────────────────────────────────
+
 async function init() {
-  // Try Teams SDK first
   try {
     setStatus('Connecting to Teams...');
     await microsoftTeams.app.initialize();
@@ -147,33 +503,25 @@ async function init() {
       return;
     }
 
-    // Try getting email through authentication
     setStatus('Trying authentication...');
     try {
       const token = await microsoftTeams.authentication.getAuthToken();
-      // Decode JWT to get email
       const payload = JSON.parse(atob(token.split('.')[1]));
       const tokenEmail = payload.preferred_username || payload.upn || payload.email || '';
-      if (tokenEmail) {
-        identifyUser(tokenEmail);
-        return;
-      }
-    } catch (authErr) {
-      // Auth token not available
-    }
+      if (tokenEmail) { identifyUser(tokenEmail); return; }
+    } catch {}
 
     showError(
       'Could not determine your identity from Teams.<br>' +
       'Context: <code>' + JSON.stringify(context.user || {}) + '</code>'
     );
-  } catch (teamsErr) {
+  } catch {
     // Not in Teams — check URL params or show picker for testing
     const params = new URLSearchParams(window.location.search);
     const email = params.get('email');
     if (email) {
       identifyUser(email);
     } else {
-      // Outside Teams — show all as fallback for browser testing
       showPicker(Object.values(AGENTS));
     }
   }
