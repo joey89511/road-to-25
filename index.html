@@ -247,6 +247,11 @@
 
 <!-- Main tabbed view (shown after identity resolved) -->
 <div id="main-view" style="display:none;">
+  <div id="back-to-agents" style="display:none;align-items:center;padding:8px 16px;background:#1a1d27;border-bottom:1px solid rgba(255,255,255,0.06);">
+    <button onclick="goBackToPicker()" style="background:none;border:none;color:#8b90a0;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:4px 0;">
+      <span style="font-size:16px;">&#8592;</span> All Agents
+    </button>
+  </div>
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('coaching')">My Coaching Report</button>
     <button class="tab-btn" onclick="switchTab('bingo')">Sales Bingo</button>
@@ -270,7 +275,6 @@
 const AGENTS = {
   'haileywalker@carsonvalley.onmicrosoft.com': { name: 'Hailey Walker', file: 'Hailey_Road_to_25.html' },
   'alezfelix@carsonvalley.onmicrosoft.com':    { name: 'Alez Felix',    file: 'Alez_Road_to_25.html' },
-  'jonathansanchez@carsonvalley.onmicrosoft.com': { name: 'Jonathan Sanchez', file: 'Jonathan_Road_to_25.html' },
 };
 
 const MANAGERS = [
@@ -283,6 +287,7 @@ let currentAgent = null;
 let currentBoard = null;
 let bingoTimer = null;
 let pendingNotePosition = null;
+let isManager = false;
 
 // ── Tab switching ───────────────────────────────────
 
@@ -311,6 +316,10 @@ function showReport(agentName, file) {
   document.getElementById('picker').style.display = 'none';
   document.getElementById('main-view').style.display = 'block';
 
+  // Show back button for managers
+  const backBtn = document.getElementById('back-to-agents');
+  if (backBtn) backBtn.style.display = isManager ? 'flex' : 'none';
+
   // Load coaching report in tab 1
   document.getElementById('tab-coaching').innerHTML =
     `<iframe class="coaching-frame" src="./${file}"></iframe>`;
@@ -322,6 +331,14 @@ function showReport(agentName, file) {
   // Poll bingo every 60s
   if (bingoTimer) clearInterval(bingoTimer);
   bingoTimer = setInterval(loadBingoBoard, 60000);
+}
+
+function goBackToPicker() {
+  if (bingoTimer) { clearInterval(bingoTimer); bingoTimer = null; }
+  document.getElementById('main-view').style.display = 'none';
+  const backBtn = document.getElementById('back-to-agents');
+  if (backBtn) backBtn.style.display = 'none';
+  showPicker(Object.values(AGENTS));
 }
 
 function showPicker(agents) {
@@ -355,6 +372,7 @@ function identifyUser(email) {
   const agentInfo = Object.entries(AGENTS).find(([key]) => lower === key || lower.includes(key.split('@')[0]));
 
   if (isManager) {
+    isManager = true;
     showPicker(Object.values(AGENTS));
   } else if (agentInfo) {
     showReport(agentInfo[1].name, agentInfo[1].file);
