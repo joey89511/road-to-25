@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Scoring System — Road to 25</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #12151c;
+    --card: #181c26;
+    --border: #242a3a;
+    --text: #e2e4ec;
+    --text-dim: #7b8098;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.25);
+    --green: #22c55e;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --s4-color: #f97316;
+    --s5-color: #06b6d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    touch-action: pan-y;
+  }
+
+  /* ── Grain overlay ─────────────────────── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Progress bar ──────────────────────── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    z-index: 200;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--s5-color));
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0%;
+  }
+
+  /* ── Slide dots ────────────────────────── */
+  .slide-dots {
+    position: fixed;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 200;
+  }
+
+  .slide-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    padding: 0;
+  }
+
+  .slide-dot.active {
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+    transform: scale(1.3);
+  }
+
+  .slide-dot.viewed {
+    background: rgba(99, 102, 241, 0.4);
+  }
+
+  /* ── Slide counter ─────────────────────── */
+  .slide-counter {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: var(--text-dim);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .slide-counter .nav-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .slide-counter .nav-btn:hover { background: rgba(99, 102, 241, 0.15); color: var(--text); }
+  .slide-counter .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .slide-counter .nav-btn:disabled:hover { background: rgba(255,255,255,0.08); color: var(--text-dim); }
+
+  /* ── Slides container ──────────────────── */
+  .slides {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 24px 80px;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .slide-inner {
+    max-width: 640px;
+    width: 100%;
+  }
+
+  /* ── Hero slide ────────────────────────── */
+  .hero-slide {
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: dot-pulse 2s ease infinite;
+  }
+
+  @keyframes dot-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-slide h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+
+  .hero-slide h1 .highlight {
+    background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 50%, var(--s5-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--text-dim);
+    max-width: 480px;
+    line-height: 1.6;
+    margin: 0 auto 40px;
+  }
+
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  .hero-glow {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulse-glow 4s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+    50% { opacity: 0.7; transform: translateX(-50%) scale(1.1); }
+  }
+
+  .swipe-hint {
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: bounce-hint 2s ease infinite;
+  }
+
+  @keyframes bounce-hint {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+
+  /* ── Stats slide ───────────────────────── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .stat-number.green { color: var(--green); }
+  .stat-number.accent { color: var(--accent); }
+  .stat-number.amber { color: var(--amber); }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  /* ── Section label + title ─────────────── */
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+  }
+
+  .section-body strong { color: var(--text); font-weight: 600; }
+
+  /* ── Weight bars ───────────────────────── */
+  .weight-compare { margin-top: 40px; }
+
+  .weight-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tag {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .tag-old { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+  .tag-new { background: rgba(34, 197, 94, 0.15); color: var(--green); }
+
+  .weight-bars {
+    display: flex;
+    gap: 3px;
+    height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .weight-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .weight-bar-label { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; opacity: 0.9; }
+  .weight-bar-pts { font-size: 10px; opacity: 0.6; margin-top: 1px; }
+
+  .old-bars .s1 { flex: 5; background: rgba(255,255,255,0.08); }
+  .old-bars .s2 { flex: 5; background: rgba(255,255,255,0.1); }
+  .old-bars .s3 { flex: 5; background: rgba(255,255,255,0.08); }
+  .old-bars .s4 { flex: 5; background: rgba(255,255,255,0.1); }
+  .old-bars .s5 { flex: 5; background: rgba(255,255,255,0.08); }
+
+  .new-bars .s1 { flex: 3; background: rgba(99, 102, 241, 0.2); }
+  .new-bars .s2 { flex: 4; background: rgba(99, 102, 241, 0.28); }
+  .new-bars .s3 { flex: 4; background: rgba(99, 102, 241, 0.28); }
+  .new-bars .s4 { flex: 7; background: linear-gradient(135deg, rgba(249, 115, 22, 0.35), rgba(249, 115, 22, 0.5)); border: 1px solid rgba(249, 115, 22, 0.3); }
+  .new-bars .s5 { flex: 7; background: linear-gradient(135deg, rgba(6, 182, 212, 0.35), rgba(6, 182, 212, 0.5)); border: 1px solid rgba(6, 182, 212, 0.3); }
+
+  .new-bars .s4 .weight-bar-label,
+  .new-bars .s5 .weight-bar-label { font-size: 13px; }
+
+  /* ── Rubric cards ──────────────────────── */
+  .rubric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rubric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .rubric-card.card-s1::before { background: var(--accent); opacity: 0.5; }
+  .rubric-card.card-s2::before { background: var(--accent); opacity: 0.7; }
+  .rubric-card.card-s3::before { background: var(--accent); opacity: 0.7; }
+  .rubric-card.card-s4::before { background: linear-gradient(90deg, var(--s4-color), #fb923c); }
+  .rubric-card.card-s5::before { background: linear-gradient(90deg, var(--s5-color), #22d3ee); }
+
+  .rubric-card.card-s4 { border-color: transparent; box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.2), 0 8px 32px rgba(249, 115, 22, 0.08); }
+  .rubric-card.card-s5 { border-color: transparent; box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2), 0 8px 32px rgba(6, 182, 212, 0.08); }
+
+  .rubric-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+
+  .rubric-name { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; line-height: 1.3; }
+  .rubric-pts { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; white-space: nowrap; line-height: 1; }
+  .rubric-pts-label { font-size: 11px; color: var(--text-dim); font-weight: 500; }
+  .card-s4 .rubric-pts { color: var(--s4-color); }
+  .card-s5 .rubric-pts { color: var(--s5-color); }
+
+  .rubric-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-top: 4px;
+  }
+
+  .card-s4 .rubric-tag { background: rgba(249, 115, 22, 0.12); color: var(--s4-color); }
+  .card-s5 .rubric-tag { background: rgba(6, 182, 212, 0.12); color: var(--s5-color); }
+
+  /* ── Levels ────────────────────────────── */
+  .levels { display: flex; flex-direction: column; }
+
+  .level {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    align-items: flex-start;
+  }
+
+  .level:last-child { border-bottom: none; padding-bottom: 0; }
+  .level:first-child { padding-top: 0; }
+
+  .level-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .level-top .level-num { background: rgba(99, 102, 241, 0.2); color: var(--accent); }
+  .card-s4 .level-top .level-num { background: rgba(249, 115, 22, 0.2); color: var(--s4-color); }
+  .card-s5 .level-top .level-num { background: rgba(6, 182, 212, 0.2); color: var(--s5-color); }
+
+  .level-desc { font-size: 13px; line-height: 1.55; color: var(--text-dim); }
+  .level-top .level-desc { color: var(--text); font-weight: 500; }
+  .level-pts { font-size: 10px; font-weight: 700; color: var(--text-dim); margin-left: 4px; opacity: 0.7; }
+  .card-s4 .level-top .level-pts { color: var(--s4-color); }
+  .card-s5 .level-top .level-pts { color: var(--s5-color); }
+
+  /* ── Step viz ──────────────────────────── */
+  .step-viz {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    height: 40px;
+  }
+
+  .step-bar {
+    border-radius: 4px 4px 0 0;
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 3px;
+  }
+
+  .step-bar span { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; }
+
+  .card-s4 .step-bar { background: rgba(249, 115, 22, 0.15); }
+  .card-s4 .step-bar:nth-child(4) { background: rgba(249, 115, 22, 0.3); }
+  .card-s4 .step-bar:nth-child(5) { background: rgba(249, 115, 22, 0.5); }
+
+  .card-s5 .step-bar { background: rgba(6, 182, 212, 0.15); }
+  .card-s5 .step-bar:nth-child(4) { background: rgba(6, 182, 212, 0.3); }
+  .card-s5 .step-bar:nth-child(5) { background: rgba(6, 182, 212, 0.5); }
+
+  .step-labels {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+
+  .step-labels span { flex: 1; text-align: center; font-size: 9px; color: var(--text-dim); }
+
+  /* ── Inline stat ───────────────────────── */
+  .inline-stat {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 32px;
+  }
+
+  .inline-stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .inline-stat-text { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+  .inline-stat-text strong { color: var(--text); }
+
+  /* ── Perfect score cards ───────────────── */
+  .perfect-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 14px;
+  }
+
+  .perfect-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .perfect-badge {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--accent);
+  }
+
+  .perfect-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
+
+  .perfect-body {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .perfect-body em {
+    color: var(--text);
+    font-style: italic;
+    background: rgba(99, 102, 241, 0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .perfect-card.card-s4 .perfect-badge { background: rgba(249, 115, 22, 0.15); color: var(--s4-color); }
+  .perfect-card.card-s5 .perfect-badge { background: rgba(6, 182, 212, 0.15); color: var(--s5-color); }
+
+  /* ── Tier grid ─────────────────────────── */
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .tier-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .tier-range { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+  .tier-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .tier-desc { font-size: 11px; color: var(--text-dim); line-height: 1.3; }
+
+  .tier-elite { border-color: rgba(34, 197, 94, 0.3); }
+  .tier-elite .tier-range, .tier-elite .tier-name { color: var(--green); }
+  .tier-strong { border-color: rgba(99, 102, 241, 0.3); }
+  .tier-strong .tier-range, .tier-strong .tier-name { color: var(--accent); }
+  .tier-developing { border-color: rgba(245, 158, 11, 0.3); }
+  .tier-developing .tier-range, .tier-developing .tier-name { color: var(--amber); }
+  .tier-needs { border-color: rgba(239, 68, 68, 0.2); }
+  .tier-needs .tier-range, .tier-needs .tier-name { color: var(--red); }
+
+  /* ── Bottom line ───────────────────────── */
+  .bottom-line { text-align: center; position: relative; }
+
+  .bottom-line blockquote {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .bottom-line .old {
+    color: var(--text-dim);
+    text-decoration: line-through;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+  }
+
+  .bottom-line .new {
+    background: linear-gradient(135deg, var(--green), var(--s5-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .done-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--green);
+  }
+
+  .footer-note {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* ── Responsive ────────────────────────── */
+  @media (max-width: 600px) {
+    .slide { padding: 48px 16px 72px; }
+    .stat-grid { grid-template-columns: 1fr; gap: 10px; }
+    .stat-card { padding: 20px; }
+    .rubric-card { padding: 20px; }
+    .rubric-header { flex-direction: column; gap: 6px; }
+    .inline-stat { flex-direction: column; text-align: center; }
+    .inline-stat-number { font-size: 1.6rem; }
+    .tier-grid { grid-template-columns: 1fr; }
+    .slide-dots { right: 6px; gap: 6px; }
+    .slide-dot { width: 6px; height: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+<div class="slide-dots" id="slide-dots"></div>
+
+<div class="slides" id="slides">
+
+  <!-- SLIDE 0: Hero -->
+  <div class="slide active" data-slide="hero">
+    <div class="hero-glow"></div>
+    <div class="slide-inner hero-slide">
+      <div class="hero-badge">March 2026 Update</div>
+      <h1>The Scoring<br>System <span class="highlight">Changed.</span></h1>
+      <p class="hero-sub">We studied 6 months of calls against actual sales. Now your score measures <strong>what actually wins deals</strong>.</p>
+      <div class="swipe-hint">Swipe or tap to continue &#8594;</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: Stats -->
+  <div class="slide" data-slide="stats">
+    <div class="slide-inner">
+      <div class="section-label">The Data</div>
+      <div class="section-title">The numbers don't lie</div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-number green">83%</div>
+          <div class="stat-label">Win rate with strong S4+S5</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number amber">18%</div>
+          <div class="stat-label">Win rate with weak S4+S5</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number accent">56%</div>
+          <div class="stat-label">Of your score is now S4+S5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Why -->
+  <div class="slide" data-slide="why">
+    <div class="slide-inner">
+      <div class="section-label">Why It Changed</div>
+      <div class="section-title">Equal weighting missed the point</div>
+      <div class="section-body">
+        <p>The old rubric treated all five sections equally — <strong>but they don't predict sales equally.</strong></p>
+        <br>
+        <p>Objection handling and closing are the strongest predictors of whether a competitive call becomes a sale. On those calls, agents who scored high on S4 and S5 won <strong>83% of the time.</strong> Low scores? <strong>18%.</strong></p>
+        <br>
+        <p>Same leads. Same prices. <strong>Different technique.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Weight comparison -->
+  <div class="slide" data-slide="weights">
+    <div class="slide-inner">
+      <div class="section-label">The Shift</div>
+      <div class="section-title">Old vs. new weights</div>
+
+      <div class="weight-compare">
+        <div class="weight-label"><span class="tag tag-old">Retired</span> Equal Weight</div>
+        <div class="weight-bars old-bars">
+          <div class="weight-bar s1"><span class="weight-bar-label">S1</span><span class="weight-bar-pts">5</span></div>
+          <div class="weight-bar s2"><span class="weight-bar-label">S2</span><span class="weight-bar-pts">5</span></div>
+          <div class="weight-bar s3"><span class="weight-bar-label">S3</span><span class="weight-bar-pts">5</span></div>
+          <div class="weight-bar s4"><span class="weight-bar-label">S4</span><span class="weight-bar-pts">5</span></div>
+          <div class="weight-bar s5"><span class="weight-bar-label">S5</span><span class="weight-bar-pts">5</span></div>
+        </div>
+
+        <div class="weight-label"><span class="tag tag-new">Active</span> Data-Driven</div>
+        <div class="weight-bars new-bars">
+          <div class="weight-bar s1"><span class="weight-bar-label">S1</span><span class="weight-bar-pts">3</span></div>
+          <div class="weight-bar s2"><span class="weight-bar-label">S2</span><span class="weight-bar-pts">4</span></div>
+          <div class="weight-bar s3"><span class="weight-bar-label">S3</span><span class="weight-bar-pts">4</span></div>
+          <div class="weight-bar s4"><span class="weight-bar-label">S4</span><span class="weight-bar-pts">7</span></div>
+          <div class="weight-bar s5"><span class="weight-bar-label">S5</span><span class="weight-bar-pts">7</span></div>
+        </div>
+      </div>
+
+      <div class="inline-stat">
+        <div class="inline-stat-number" style="color: var(--s4-color);">14/25</div>
+        <div class="inline-stat-text"><strong>S4 + S5 are 56% of your total score</strong> because they drive the majority of wins on competitive calls.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: S1 + S2 -->
+  <div class="slide" data-slide="s1-s2">
+    <div class="slide-inner">
+      <div class="section-label">The Rubric</div>
+      <div class="section-title" style="margin-bottom: 24px;">Setup sections</div>
+
+      <div class="rubric-card card-s1" style="margin-bottom: 16px;">
+        <div class="rubric-header">
+          <div class="rubric-name">S1: Call Takeover</div>
+          <div class="rubric-pts">3<span class="rubric-pts-label"> pts</span></div>
+        </div>
+        <div class="levels">
+          <div class="level"><div class="level-num">1</div><div class="level-desc">Creates friction. Customer repeats themselves.</div></div>
+          <div class="level"><div class="level-num">2</div><div class="level-desc">Clean handoff. Greets by name, confirms info.</div></div>
+          <div class="level level-top"><div class="level-num">3</div><div class="level-desc">Seamless AND into first real question within 30 seconds.</div></div>
+        </div>
+      </div>
+
+      <div class="rubric-card card-s2">
+        <div class="rubric-header">
+          <div class="rubric-name">S2: Building Your Case</div>
+          <div class="rubric-pts">4<span class="rubric-pts-label"> pts</span></div>
+        </div>
+        <div class="levels">
+          <div class="level"><div class="level-num">1</div><div class="level-desc">Order-taking. Learns nothing new.</div></div>
+          <div class="level"><div class="level-num">2</div><div class="level-desc">Asks 1–2 basics but misses price, reason, or needs.</div></div>
+          <div class="level"><div class="level-num">3</div><div class="level-desc">Knows carrier, price, coverage, rent/own, drivers. Asks why they're shopping.</div></div>
+          <div class="level level-top"><div class="level-num">4</div><div class="level-desc">Everything in 3 PLUS uncovers the real reason. Spots hidden needs. Full household review.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: S3 -->
+  <div class="slide" data-slide="s3">
+    <div class="slide-inner">
+      <div class="section-label">The Rubric</div>
+      <div class="section-title" style="margin-bottom: 24px;">Presenting the quote</div>
+
+      <div class="rubric-card card-s3">
+        <div class="rubric-header">
+          <div class="rubric-name">S3: Presenting the Quote</div>
+          <div class="rubric-pts">4<span class="rubric-pts-label"> pts</span></div>
+        </div>
+        <div class="levels">
+          <div class="level"><div class="level-num">1</div><div class="level-desc">Reads the price. No explanation, no comparison.</div></div>
+          <div class="level"><div class="level-num">2</div><div class="level-desc">Explains the quote but never compares to what they have now.</div></div>
+          <div class="level"><div class="level-num">3</div><div class="level-desc">Compares old vs new with real numbers. Shows savings and gains.</div></div>
+          <div class="level level-top"><div class="level-num">4</div><div class="level-desc">Makes it personal. Uses discovery to frame around their situation and risk.</div></div>
+        </div>
+      </div>
+
+      <div class="inline-stat" style="margin-top: 20px;">
+        <div class="inline-stat-number" style="color: var(--accent);">S1–S3</div>
+        <div class="inline-stat-text">These three set up the close. They're worth <strong>11 points combined (44%)</strong>. Discovery is ammunition — use it in S4 and S5.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: S4 -->
+  <div class="slide" data-slide="s4">
+    <div class="slide-inner">
+      <div class="section-label">Where Sales Are Won</div>
+      <div class="section-title" style="margin-bottom: 24px;">Objection handling</div>
+
+      <div class="rubric-card card-s4">
+        <div class="rubric-header">
+          <div><div class="rubric-name">S4: Objection Handling</div><div class="rubric-tag">Where sales are won or lost</div></div>
+          <div class="rubric-pts">7<span class="rubric-pts-label"> pts</span></div>
+        </div>
+        <div class="step-viz">
+          <div class="step-bar" style="height: 14%;"><span>1</span></div>
+          <div class="step-bar" style="height: 29%;"><span>2</span></div>
+          <div class="step-bar" style="height: 43%;"><span>3</span></div>
+          <div class="step-bar" style="height: 71%;"><span>5</span></div>
+          <div class="step-bar" style="height: 100%;"><span>7</span></div>
+        </div>
+        <div class="step-labels"><span>Lvl 1</span><span>Lvl 2</span><span>Lvl 3</span><span>Lvl 4</span><span>Lvl 5</span></div>
+        <div class="levels">
+          <div class="level"><div class="level-num">1</div><div class="level-desc">Gives up at first pushback.<span class="level-pts">1 pt</span></div></div>
+          <div class="level"><div class="level-num">2</div><div class="level-desc">Acknowledges but doesn't dig in. Goes passive.<span class="level-pts">2 pts</span></div></div>
+          <div class="level"><div class="level-num">3</div><div class="level-desc">Acknowledge, clarify, respond, confirm.<span class="level-pts">3 pts</span></div></div>
+          <div class="level"><div class="level-num">4</div><div class="level-desc">Addresses the objection before it comes up using discovery.<span class="level-pts">5 pts</span></div></div>
+          <div class="level level-top"><div class="level-num">5</div><div class="level-desc">Level 4 framing works OR multi-layered rebuttal. Stays in the fight.<span class="level-pts">7 pts</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: S5 -->
+  <div class="slide" data-slide="s5">
+    <div class="slide-inner">
+      <div class="section-label">Close Early, Close Often</div>
+      <div class="section-title" style="margin-bottom: 24px;">Closing throughout the call</div>
+
+      <div class="rubric-card card-s5">
+        <div class="rubric-header">
+          <div><div class="rubric-name">S5: Closing Throughout the Call</div><div class="rubric-tag">Close early, close often</div></div>
+          <div class="rubric-pts">7<span class="rubric-pts-label"> pts</span></div>
+        </div>
+        <div class="step-viz">
+          <div class="step-bar" style="height: 14%;"><span>1</span></div>
+          <div class="step-bar" style="height: 29%;"><span>2</span></div>
+          <div class="step-bar" style="height: 43%;"><span>3</span></div>
+          <div class="step-bar" style="height: 71%;"><span>5</span></div>
+          <div class="step-bar" style="height: 100%;"><span>7</span></div>
+        </div>
+        <div class="step-labels"><span>Lvl 1</span><span>Lvl 2</span><span>Lvl 3</span><span>Lvl 4</span><span>Lvl 5</span></div>
+        <div class="levels">
+          <div class="level"><div class="level-num">1</div><div class="level-desc">No close attempt. "I'll email the quote."<span class="level-pts">1 pt</span></div></div>
+          <div class="level"><div class="level-num">2</div><div class="level-desc">One weak ask at the end. Accepts the first "no."<span class="level-pts">2 pts</span></div></div>
+          <div class="level"><div class="level-num">3</div><div class="level-desc">Clear closing question. Urgency. Locks in a callback date.<span class="level-pts">3 pts</span></div></div>
+          <div class="level"><div class="level-num">4</div><div class="level-desc">Starts asking before quoting. Asks again after. Multiple attempts.<span class="level-pts">5 pts</span></div></div>
+          <div class="level level-top"><div class="level-num">5</div><div class="level-desc">Closing from minute one. Trial closes throughout. At least 3 asks. Tries different angles.<span class="level-pts">7 pts</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: How to score perfect -->
+  <div class="slide" data-slide="playbook">
+    <div class="slide-inner">
+      <div class="section-label">Playbook</div>
+      <div class="section-title">How to score 25/25</div>
+
+      <div class="perfect-card"><div class="perfect-header"><span class="perfect-badge">S1 — 3/3</span><span class="perfect-title">Call Takeover</span></div><div class="perfect-body">Confirm name + key info in one sentence, then ask your first discovery question within 30 seconds. Don't chat. Get in and go.</div></div>
+
+      <div class="perfect-card"><div class="perfect-header"><span class="perfect-badge">S2 — 4/4</span><span class="perfect-title">Building Your Case</span></div><div class="perfect-body">Ask carrier, price, why shopping, rent/own, all drivers, toys, tickets. <em>Find the real reason.</em> Every answer becomes ammunition for your close.</div></div>
+
+      <div class="perfect-card"><div class="perfect-header"><span class="perfect-badge">S3 — 4/4</span><span class="perfect-title">Presenting the Quote</span></div><div class="perfect-body">Use their words: <em>"You're paying $210 for liability-only on a 2024 Accord. I've got you at $185 with full coverage. One accident and that car is gone — now it's protected."</em></div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: How to score perfect (S4 + S5) -->
+  <div class="slide" data-slide="playbook-close">
+    <div class="slide-inner">
+      <div class="section-label">Playbook</div>
+      <div class="section-title">The money sections</div>
+
+      <div class="perfect-card card-s4"><div class="perfect-header"><span class="perfect-badge">S4 — 7/7</span><span class="perfect-title">Objection Handling</span></div><div class="perfect-body">Preframe with discovery: <em>"Your rate jumped $40 last renewal. For less than what you're paying now, you get better coverage and it takes 10 minutes."</em> When they push back, use THEIR situation. Then close again.</div></div>
+
+      <div class="perfect-card card-s5"><div class="perfect-header"><span class="perfect-badge">S5 — 7/7</span><span class="perfect-title">Closing Throughout</span></div><div class="perfect-body">Start with: <em>"If I can save you money with better coverage, is that something you'd want to start today?"</em> Trial close during discovery. Close after quoting. Close after objections. At least 3 asks. The close isn't a moment — it's the whole call.</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Tiers + Bottom line -->
+  <div class="slide" data-slide="tiers">
+    <div class="slide-inner">
+      <div class="section-label">Performance</div>
+      <div class="section-title">Your tier</div>
+
+      <div class="tier-grid">
+        <div class="tier-card tier-elite"><div class="tier-range">21–25</div><div class="tier-name">Elite</div><div class="tier-desc">Winning calls they shouldn't on paper</div></div>
+        <div class="tier-card tier-strong"><div class="tier-range">16–20</div><div class="tier-name">Strong</div><div class="tier-desc">Closing most winnable calls</div></div>
+        <div class="tier-card tier-developing"><div class="tier-range">11–15</div><div class="tier-name">Developing</div><div class="tier-desc">Winning the easy ones</div></div>
+        <div class="tier-card tier-needs"><div class="tier-range">&lt; 11</div><div class="tier-name">Needs Improvement</div><div class="tier-desc">Missing opportunities</div></div>
+      </div>
+
+      <div style="margin-top: 48px;" class="bottom-line">
+        <blockquote>The old rubric rewarded <span class="old">sounding good.</span><br>The new one rewards <span class="new">selling.</span></blockquote>
+        <div class="done-check" id="done-check" style="display:none;">&#10003; You've reviewed the full update</div>
+        <div class="footer-note">Road to 25 &middot; March 2026</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="slide-counter">
+  <button class="nav-btn" id="btn-prev" disabled onclick="go(-1)">&#8592; Back</button>
+  <span id="counter-text">1 / 11</span>
+  <button class="nav-btn" id="btn-next" onclick="go(1)">Next &#8594;</button>
+</div>
+
+<script>
+  // ── Slide engine ──────────────────────────
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let current = 0;
+  const viewed = new Set();
+  let agentName = null;
+  let transitioning = false;
+
+  // Try to get agent name from parent (coaching.html passes it via URL param)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    agentName = params.get('agent');
+  } catch {}
+
+  // Build dots
+  const dotsContainer = document.getElementById('slide-dots');
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= totalSlides || idx === current || transitioning) return;
+    transitioning = true;
+
+    // Flush time for the slide we're leaving
+    onLeaveSlide(current);
+
+    slides[current].classList.remove('active');
+    slides[current].style.transform = idx > current ? 'translateY(-40px)' : 'translateY(40px)';
+    current = idx;
+    slides[current].classList.add('active');
+    slides[current].scrollTop = 0;
+
+    // Reset timer for new slide
+    slideEnteredAt = Date.now();
+
+    // Update UI
+    document.querySelectorAll('.slide-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    document.getElementById('counter-text').textContent = `${current + 1} / ${totalSlides}`;
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').disabled = current === totalSlides - 1;
+    document.getElementById('progress-fill').style.width = `${((current + 1) / totalSlides) * 100}%`;
+
+    // Track view
+    trackView(current);
+
+    setTimeout(() => { transitioning = false; }, 500);
+  }
+
+  function go(dir) { goTo(current + dir); }
+
+  // ── Time tracking ──────────────────────────
+  let slideEnteredAt = Date.now();
+  const slideTimes = {}; // accumulated ms per slide index
+
+  function flushSlideTime() {
+    const elapsed = Date.now() - slideEnteredAt;
+    if (elapsed > 200) { // ignore sub-200ms flickers
+      slideTimes[current] = (slideTimes[current] || 0) + elapsed;
+    }
+  }
+
+  function sendDuration(idx) {
+    const secs = (slideTimes[idx] || 0) / 1000;
+    if (!agentName || secs < 0.5) return;
+    const slideName = slides[idx].dataset.slide;
+    const payload = JSON.stringify({ agent: agentName, slide: slideName, duration: secs });
+    // Use sendBeacon for reliability on page close, fall back to fetch
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/teams/rubric-track', new Blob([payload], { type: 'application/json' }));
+    } else {
+      fetch('/teams/rubric-track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload }).catch(() => {});
+    }
+    slideTimes[idx] = 0; // reset after sending
+  }
+
+  function trackView(idx) {
+    const isNew = !viewed.has(idx);
+    viewed.add(idx);
+
+    const dot = dotsContainer.children[idx];
+    if (dot) dot.classList.add('viewed');
+
+    // Show completion check on last slide
+    if (viewed.size === totalSlides) {
+      document.getElementById('done-check').style.display = 'inline-flex';
+    }
+
+    // POST first view to server
+    if (isNew && agentName) {
+      fetch('/teams/rubric-track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agent: agentName, slide: slides[idx].dataset.slide, duration: 0 }),
+      }).catch(() => {});
+    }
+  }
+
+  // Flush time when leaving a slide
+  function onLeaveSlide(idx) {
+    flushSlideTime();
+    sendDuration(idx);
+  }
+
+  // Detect visibility changes (tab switch, minimize, lock screen)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      flushSlideTime();
+      sendDuration(current);
+    } else {
+      slideEnteredAt = Date.now();
+    }
+  });
+
+  // Detect page close / navigate away
+  window.addEventListener('pagehide', () => {
+    flushSlideTime();
+    sendDuration(current);
+  });
+
+  // Also handle beforeunload for older browsers
+  window.addEventListener('beforeunload', () => {
+    flushSlideTime();
+    sendDuration(current);
+  });
+
+  // Detect iframe losing focus (parent switches tabs in coaching.html)
+  window.addEventListener('blur', () => {
+    flushSlideTime();
+    sendDuration(current);
+  });
+
+  window.addEventListener('focus', () => {
+    slideEnteredAt = Date.now();
+  });
+
+  // Track initial slide
+  trackView(0);
+
+  // ── Keyboard nav ──────────────────────────
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(-1); }
+  });
+
+  // ── Touch swipe ───────────────────────────
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dy = touchStartY - e.changedTouches[0].clientY;
+    const dx = touchStartX - e.changedTouches[0].clientX;
+
+    // Only trigger on significant swipes (>50px), prefer horizontal
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      dx > 0 ? go(1) : go(-1);
+    } else if (Math.abs(dy) > 50) {
+      dy > 0 ? go(1) : go(-1);
+    }
+  }, { passive: true });
+
+  // ── Init progress bar ─────────────────────
+  document.getElementById('progress-fill').style.width = `${(1 / totalSlides) * 100}%`;
+</script>
+</body>
+</html>

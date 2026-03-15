@@ -253,9 +253,14 @@
     </button>
   </div>
   <div class="tab-bar">
+    <button class="tab-btn" onclick="switchTab('update')" id="tab-btn-update" style="color:#6366f1;position:relative;">
+      New Rubric
+      <span style="position:absolute;top:6px;right:8px;width:7px;height:7px;border-radius:50%;background:#ef4444;" id="update-dot"></span>
+    </button>
     <button class="tab-btn active" onclick="switchTab('coaching')">My Coaching Report</button>
     <button class="tab-btn" onclick="switchTab('bingo')">Sales Bingo</button>
   </div>
+  <div id="tab-update" class="tab-content"></div>
   <div id="tab-coaching" class="tab-content active"></div>
   <div id="tab-bingo" class="tab-content"></div>
 </div>
@@ -292,10 +297,18 @@ let isManager = false;
 // ── Tab switching ───────────────────────────────────
 
 function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().includes(tab === 'coaching' ? 'coaching' : 'bingo')));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const tabIds = { update: 'tab-btn-update', coaching: null, bingo: null };
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (tab === 'update' && b.id === 'tab-btn-update') b.classList.add('active');
+    else if (tab === 'coaching' && b.textContent.includes('Coaching')) b.classList.add('active');
+    else if (tab === 'bingo' && b.textContent.includes('Bingo')) b.classList.add('active');
+  });
+  document.getElementById('tab-update').classList.toggle('active', tab === 'update');
   document.getElementById('tab-coaching').classList.toggle('active', tab === 'coaching');
   document.getElementById('tab-bingo').classList.toggle('active', tab === 'bingo');
   if (tab === 'bingo' && currentAgent) loadBingoBoard();
+  if (tab === 'update' && currentAgent) loadRubricUpdate();
 }
 
 function switchToCoachingSection(section) {
@@ -499,6 +512,20 @@ function showToast(msg, isError) {
   el.textContent = msg;
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 2500);
+}
+
+// ── Rubric Update ────────────────────────────────────
+
+let rubricLoaded = false;
+function loadRubricUpdate() {
+  if (rubricLoaded) return;
+  rubricLoaded = true;
+  const agentParam = encodeURIComponent(currentAgent || '');
+  document.getElementById('tab-update').innerHTML =
+    `<iframe class="coaching-frame" src="./Rubric_Update.html?agent=${agentParam}"></iframe>`;
+  // Hide notification dot after viewing
+  const dot = document.getElementById('update-dot');
+  if (dot) dot.style.display = 'none';
 }
 
 // ── Init ─────────────────────────────────────────────
