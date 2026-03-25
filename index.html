@@ -278,8 +278,8 @@
 
 <script>
 const AGENTS = {
-  'haileywalker@carsonvalley.onmicrosoft.com': { name: 'Hailey Walker', file: 'Hailey_Road_to_25.html' },
-  'alezfelix@carsonvalley.onmicrosoft.com':    { name: 'Alez Felix',    file: 'Alez_Road_to_25.html' },
+  'haileywalker@carsonvalley.onmicrosoft.com': { name: 'Hailey Walker', file: 'Hailey_Road_to_25.html', coachingDisabled: true },
+  'alezfelix@carsonvalley.onmicrosoft.com':    { name: 'Alez Felix',    file: 'Alez_Road_to_25.html',   coachingDisabled: true },
 };
 
 const MANAGERS = [
@@ -289,6 +289,7 @@ const MANAGERS = [
 ];
 
 let currentAgent = null;
+let currentAgentInfo = null;
 let currentBoard = null;
 let bingoTimer = null;
 let pendingNotePosition = null;
@@ -322,8 +323,9 @@ function switchToCoachingSection(section) {
 
 // ── Identity ────────────────────────────────────────
 
-function showReport(agentName, file) {
+function showReport(agentName, file, agentInfo) {
   currentAgent = agentName;
+  currentAgentInfo = agentInfo || {};
   document.getElementById('loading').style.display = 'none';
   document.getElementById('error').style.display = 'none';
   document.getElementById('picker').style.display = 'none';
@@ -333,9 +335,18 @@ function showReport(agentName, file) {
   const backBtn = document.getElementById('back-to-agents');
   if (backBtn) backBtn.style.display = isManager ? 'flex' : 'none';
 
-  // Load coaching report in tab 1
-  document.getElementById('tab-coaching').innerHTML =
-    `<iframe class="coaching-frame" src="./${file}"></iframe>`;
+  // Load coaching report in tab 1 (or show placeholder if temporarily disabled)
+  const coachingTab = document.getElementById('tab-coaching');
+  const coachingBtn = document.querySelector('.tab-btn:nth-child(2)');
+  if (currentAgentInfo.coachingDisabled) {
+    coachingTab.innerHTML = '<div style="text-align:center;padding:3rem 1rem;color:#8b90a0;"><h2 style="color:#fff;margin-bottom:0.5rem;">Coaching Report Paused</h2><p>Your coaching report is being updated. Check back soon!</p></div>';
+    if (coachingBtn) { coachingBtn.style.opacity = '0.4'; coachingBtn.style.pointerEvents = 'none'; }
+    // Default to bingo tab instead
+    switchTab('bingo');
+  } else {
+    coachingTab.innerHTML = `<iframe class="coaching-frame" src="./${file}"></iframe>`;
+    if (coachingBtn) { coachingBtn.style.opacity = '1'; coachingBtn.style.pointerEvents = 'auto'; }
+  }
 
   // Load bingo in tab 2
   document.getElementById('tab-bingo').innerHTML = '<div class="bingo-wrap"><div class="loading"><h2>Loading bingo...</h2></div></div>';
@@ -363,7 +374,7 @@ function showPicker(agents) {
   agents.forEach(a => {
     const link = document.createElement('a');
     link.textContent = a.name;
-    link.onclick = () => showReport(a.name, a.file);
+    link.onclick = () => showReport(a.name, a.file, a);
     cards.appendChild(link);
   });
   picker.style.display = 'block';
@@ -388,7 +399,7 @@ function identifyUser(email) {
     isManager = true;
     showPicker(Object.values(AGENTS));
   } else if (agentInfo) {
-    showReport(agentInfo[1].name, agentInfo[1].file);
+    showReport(agentInfo[1].name, agentInfo[1].file, agentInfo[1]);
   } else {
     showError(
       'No coaching report found for your account.<br>' +
