@@ -43,10 +43,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .score-max{font-size:1rem;color:var(--dim);font-weight:400}
 .score-label{font-size:11px;color:var(--dim);margin-top:6px;font-weight:500}
 .score-trend{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;margin-top:6px;padding:3px 8px;border-radius:6px}
+.trend-up{background:rgba(34,197,94,.1);color:var(--green)}
 .trend-down{background:rgba(239,68,68,.1);color:var(--red)}
 
 .tier-badge{display:inline-block;font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase;margin-top:8px}
 .tier-needs{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.15)}
+.tier-developing{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
 
 .mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
 .mini-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center}
@@ -159,7 +161,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 
 <!-- Hero -->
 <div class="hero rv">
-  <div class="hero-week">Week of March 10, 2026</div>
+  <div class="hero-week">Week of April 6, 2026</div>
   <h1 class="hero-name">Alez Felix</h1>
   <div class="hero-sub">Road to 25 &middot; Weekly Coaching Report</div>
 </div>
@@ -169,25 +171,25 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   <div class="container">
     <div class="score-row">
       <div class="score-card">
-        <div class="score-big">11.5<span class="score-max">/25</span></div>
+        <div class="score-big">13.1<span class="score-max">/25</span></div>
         <div class="score-label">Weekly Average</div>
-        <div class="score-trend trend-down">&#9660; -1.0 vs last week</div>
-        <div class="tier-badge tier-needs">Needs Improvement</div>
+        <div class="score-trend trend-up">&#9650; +1.6 vs March</div>
+        <div class="tier-badge tier-developing">Developing</div>
       </div>
       <div class="score-card">
-        <div class="score-big" style="font-size:2rem;">15</div>
+        <div class="score-big" style="font-size:2rem;">21</div>
         <div class="score-label">Calls Scored</div>
         <div class="mini-stats">
-          <div class="mini-stat"><div class="mini-val" style="color:var(--green)">2</div><div class="mini-label">Strong</div></div>
-          <div class="mini-stat"><div class="mini-val" style="color:var(--amber)">6</div><div class="mini-label">Developing</div></div>
-          <div class="mini-stat"><div class="mini-val" style="color:var(--red)">7</div><div class="mini-label">Needs Work</div></div>
+          <div class="mini-stat"><div class="mini-val" style="color:var(--green)">4</div><div class="mini-label">Strong</div></div>
+          <div class="mini-stat"><div class="mini-val" style="color:var(--amber)">14</div><div class="mini-label">Developing</div></div>
+          <div class="mini-stat"><div class="mini-val" style="color:var(--amber)">3</div><div class="mini-label">Needs Work</div></div>
         </div>
       </div>
     </div>
     <div class="mini-stats" style="margin-top:12px">
-      <div class="mini-stat"><div class="mini-val">62</div><div class="mini-label">Contacts</div></div>
-      <div class="mini-stat"><div class="mini-val">23</div><div class="mini-label">Quotes</div></div>
-      <div class="mini-stat"><div class="mini-val" style="color:var(--amber)">3</div><div class="mini-label">Closes</div></div>
+      <div class="mini-stat"><div class="mini-val">87</div><div class="mini-label">Contacts</div></div>
+      <div class="mini-stat"><div class="mini-val">32</div><div class="mini-label">Quotes</div></div>
+      <div class="mini-stat"><div class="mini-val" style="color:var(--red)">2</div><div class="mini-label">Closes</div></div>
     </div>
   </div>
 </div>
@@ -200,9 +202,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
     <div class="sec-card">
       <div class="sec-icon sec-icon-1">S1</div>
       <div class="sec-info">
-        <div class="sec-name">Call Takeover <span class="sec-badge badge-best">Best</span></div>
-        <div class="sec-bar-wrap"><div class="sec-bar" style="width:48%;background:var(--accent)"></div></div>
-        <div class="sec-avg">Avg <strong>2.4</strong> / 5</div>
+        <div class="sec-name">Call Takeover</div>
+        <div class="sec-bar-wrap"><div class="sec-bar" style="width:56%;background:var(--accent)"></div></div>
+        <div class="sec-avg">Avg <strong>2.81</strong> / 5</div>
       </div>
       <div class="sec-pts">/3<br>new</div>
     </div>
@@ -210,9 +212,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
     <div class="sec-card">
       <div class="sec-icon sec-icon-2">S2</div>
       <div class="sec-info">
-        <div class="sec-name">Building Your Case <span class="sec-badge badge-gap">Lowest</span></div>
-        <div class="sec-bar-wrap"><div class="sec-bar" style="width:41%;background:var(--red)"></div></div>
-        <div class="sec-avg">Avg <strong>2.1</strong> / 5</div>
+        <div class="sec-name">Building Your Case <span class="sec-badge badge-best">Best</span></div>
+        <div class="sec-bar-wrap"><div class="sec-bar" style="width:57%;background:var(--green)"></div></div>
+        <div class="sec-avg">Avg <strong>2.86</strong> / 5</div>
       </div>
       <div class="sec-pts">/4<br>new</div>
     </div>
@@ -220,9 +222,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
     <div class="sec-card">
       <div class="sec-icon sec-icon-3">S3</div>
       <div class="sec-info">
-        <div class="sec-name">Presenting the Quote <span class="sec-badge badge-gap">Gap</span></div>
-        <div class="sec-bar-wrap"><div class="sec-bar" style="width:43%;background:var(--red)"></div></div>
-        <div class="sec-avg">Avg <strong>2.2</strong> / 5</div>
+        <div class="sec-name">Presenting the Quote</div>
+        <div class="sec-bar-wrap"><div class="sec-bar" style="width:52%;background:var(--accent)"></div></div>
+        <div class="sec-avg">Avg <strong>2.59</strong> / 5</div>
       </div>
       <div class="sec-pts">/4<br>new</div>
     </div>
@@ -230,9 +232,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
     <div class="sec-card highlight-s4">
       <div class="sec-icon sec-icon-4">S4</div>
       <div class="sec-info">
-        <div class="sec-name">Objection Handling</div>
-        <div class="sec-bar-wrap"><div class="sec-bar" style="width:60%;background:var(--s4)"></div></div>
-        <div class="sec-avg">Avg <strong>3.0</strong> / 5</div>
+        <div class="sec-name">Objection Handling <span class="sec-badge badge-gap">Lowest</span></div>
+        <div class="sec-bar-wrap"><div class="sec-bar" style="width:42%;background:var(--red)"></div></div>
+        <div class="sec-avg">Avg <strong>2.08</strong> / 5</div>
       </div>
       <div class="sec-pts" style="color:var(--s4)">/7<br>new</div>
     </div>
@@ -241,8 +243,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
       <div class="sec-icon sec-icon-5">S5</div>
       <div class="sec-info">
         <div class="sec-name">Closing Throughout <span class="sec-badge badge-gap">Gap</span></div>
-        <div class="sec-bar-wrap"><div class="sec-bar" style="width:52%;background:var(--s5)"></div></div>
-        <div class="sec-avg">Avg <strong>2.6</strong> / 5</div>
+        <div class="sec-bar-wrap"><div class="sec-bar" style="width:46%;background:var(--s5)"></div></div>
+        <div class="sec-avg">Avg <strong>2.31</strong> / 5</div>
       </div>
       <div class="sec-pts" style="color:var(--s5)">/7<br>new</div>
     </div>
@@ -256,18 +258,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   <div class="container">
     <div class="money-card">
       <div class="money-label"><span>The Money Zone</span></div>
-      <div class="money-ring" style="--pct:0.077">
+      <div class="money-ring" style="--pct:0.05">
         <svg viewBox="0 0 160 160">
           <circle class="ring-bg" cx="80" cy="80" r="70"/>
           <circle class="ring-fill" cx="80" cy="80" r="70"/>
         </svg>
         <div class="money-pct">
-          <div class="money-pct-num">7.7%</div>
+          <div class="money-pct-num">5%</div>
           <div class="money-pct-label">of calls in the zone</div>
         </div>
       </div>
       <div class="money-context">
-        <strong>1 out of 13</strong> scored calls hit strong S4+S5 (combined &#8805;8). When you're in the money zone, data shows an <strong>83% win rate</strong> on competitive calls. Right now you're leaving sales on the table.
+        <strong>1 out of 21</strong> scored calls hit strong S4+S5 (combined &#8805;8). When you're in the money zone, data shows an <strong>83% win rate</strong> on competitive calls. Right now you're leaving sales on the table.
       </div>
       <div class="money-target">Target: 25%+ of calls in the zone</div>
     </div>
@@ -281,45 +283,497 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
     <div class="best-card">
       <div class="best-header">
         <div><div class="best-badge">Top Call</div></div>
-        <div class="best-score" style="color:var(--green)">20<span style="font-size:.8rem;color:var(--dim)">/25</span></div>
+        <div class="best-score" style="color:var(--green)">18<span style="font-size:.8rem;color:var(--dim)">/25</span></div>
       </div>
-      <div class="best-name">Iliana Ibarra</div>
-      <div class="best-date">March 11, 2026</div>
+      <div class="best-name">Randi Salmon</div>
+      <div class="best-date">April 8, 2026</div>
       <div class="best-scores">
         <span class="best-s">S1: 3</span>
-        <span class="best-s">S2: 3</span>
+        <span class="best-s s-high">S2: 4</span>
         <span class="best-s s-high">S3: 4</span>
-        <span class="best-s s-s4">S4: 5</span>
-        <span class="best-s s-s5">S5: 5</span>
+        <span class="best-s">S4: 3</span>
+        <span class="best-s s-s5">S5: 4</span>
       </div>
       <div class="best-why">
-        <strong>Why this call worked:</strong> Deep discovery (S2=3) gave Alez the ammunition to present a personal quote (S3=4). He preframed objections using the customer's own situation (S4=5) and closed throughout the entire call (S5=5). <strong>This is the blueprint.</strong>
+        <strong>Why this call worked:</strong> Diagnosed the husband-rejection problem live, pivoted to solo coverage, stacked the renters bundle, and adjusted personal property limits based on customer input. Customer said "that's like one of the best I received." S2 discovery drove S3 value — <strong>this is the blueprint.</strong>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+<!-- Winnable Calls -->
+<div class="winnable-section rv" style="padding:0 16px 40px">
+  <div class="container">
+    <div class="sec-title">Winnable Calls</div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px">
+      <h3 style="margin:0 0 12px;font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px">Won vs Could-Have-Won — Where the Gap Is</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed">
+        <colgroup><col style="width:38%"><col style="width:20%"><col style="width:22%"><col style="width:20%"></colgroup>
+        <tr>
+          <th style="text-align:left;padding:8px 12px;color:var(--dim);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border)">Section</th>
+          <th style="text-align:right;padding:8px 12px;color:var(--green);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border)">Won</th>
+          <th style="text-align:right;padding:8px 12px;color:var(--red);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border)">Could Have Won</th>
+          <th style="text-align:right;padding:8px 12px;color:var(--dim);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border)">Gap</th>
+        </tr>
+        <tr>
+      <td style="padding:10px 12px;text-align:left;color:var(--text);border-bottom:1px solid var(--border)">S1 — Takeover</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">2.7</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--red);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">2.9</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--red);font-weight:700;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">-0.2</td>
+    </tr><tr>
+      <td style="padding:10px 12px;text-align:left;color:var(--text);border-bottom:1px solid var(--border)">S2 — Discovery</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">3.3</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--red);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">2.9</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-weight:700;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">+0.4</td>
+    </tr><tr>
+      <td style="padding:10px 12px;text-align:left;color:var(--text);border-bottom:1px solid var(--border)">S3 — Presentation</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">3.0</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--red);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">2.7</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-weight:700;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">+0.3</td>
+    </tr><tr>
+      <td style="padding:10px 12px;text-align:left;color:var(--text);border-bottom:1px solid var(--border)">S4 — Objections</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">3.4</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--red);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">2.3</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-weight:700;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">+1.1</td>
+    </tr><tr>
+      <td style="padding:10px 12px;text-align:left;color:var(--text);border-bottom:1px solid var(--border)">S5 — Closing</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">3.3</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--red);font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">2.6</td>
+      <td style="padding:10px 12px;text-align:right;color:var(--green);font-weight:700;font-variant-numeric:tabular-nums;border-bottom:1px solid var(--border)">+0.7</td>
+    </tr><tr>
+    <td style="padding:12px;text-align:left;color:var(--text);font-weight:700;border-top:2px solid var(--border)">Overall Avg</td>
+    <td style="padding:12px;text-align:right;color:var(--green);font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border)">16.9</td>
+    <td style="padding:12px;text-align:right;color:var(--red);font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border)">13.4</td>
+    <td style="padding:12px;text-align:right;color:var(--green);font-weight:700;font-variant-numeric:tabular-nums;border-top:2px solid var(--border)">+3.5</td>
+  </tr>
+      </table>
+      <p style="margin:12px 0 0;font-size:11px;color:var(--dim);line-height:1.5">The biggest gap = the biggest coaching opportunity.</p>
+    </div>
+
+    <div style="display:flex;gap:0;margin-bottom:12px;border-bottom:1px solid var(--border)">
+      <div class="wtab" data-target="won" style="padding:10px 18px;font-size:12px;font-weight:700;color:var(--accent);border-bottom:2px solid var(--accent);cursor:pointer;letter-spacing:.5px;text-transform:uppercase">Won (12)</div>
+      <div class="wtab" data-target="lost" style="padding:10px 18px;font-size:12px;font-weight:700;color:var(--dim);border-bottom:2px solid transparent;cursor:pointer;letter-spacing:.5px;text-transform:uppercase">Could Have Won (16)</div>
+    </div>
+
+    <div class="wpanel" data-panel="won">
+      
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">ELLEN CARIGMA</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">02/16/2026 · competitive close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">22<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $155/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Was: $168/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $963</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Won by being $13/month cheaper than current carrier while adding renters insurance and second driver - customer immediately recognized the value when she heard the price was less than what she currently pays</div>
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">CAROLYN GILYARD</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">02/18/2026 · value build close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">19<span style="font-size:12px;color:var(--dim)">/20</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $202.35/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $1259</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Overcame price objection by bundling renters insurance, reducing premium from $207 to $202.35 and providing additional coverage value</div>
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Juan DeHaro</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">02/24/2026</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">19<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $128/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Was: $127.5/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $709</span></div>
+        
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Eliaz Scott</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">02/13/2026 · needs based close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">18<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $372/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Was: $370/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $2229</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Agent overcame price gap by adding medical coverage through deductible adjustment, matching competitor's $370 rate while providing better medical coverage than customer's current policy.</div>
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Robert Lucero</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">03/02/2026 · assumptive close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">18<span style="font-size:12px;color:var(--dim)">/10</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $148/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $888</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Provided excellent customer service during the binding process, patiently walking customer through e-signature completion and offering additional coverage options</div>
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Maribel Torres</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">02/16/2026 · assumptive close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">17<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $109.71/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $673</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Agent clearly explained that the price increase from the original quote was due to adding the uninsured motorist coverage the customer specifically requested, which she acknowledged she needed.</div>
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Akane Dornis</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">02/19/2026</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">16<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $194/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Was: $270/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $1086</span></div>
+        
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Princess Aguila</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">03/02/2026 · assumptive close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">16<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $684/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $4337</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Customer was already motivated to switch due to Progressive rate increase - agent simply provided competitive quote and smoothly processed the sale with minimal resistance.</div>
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Daniela Mendoza</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">02/03/2026 · needs based close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">15<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $143/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $923</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Agent leveraged customer's urgent DMV situation - offered immediate proof of insurance to resolve registration cancellation, turning compliance need into buying motivation</div>
+        
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Sharon Schwichtenberg</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">03/18/2026 · competitive close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">15<span style="font-size:12px;color:var(--dim)">/18</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $108/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Was: $216/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $776</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Agent revealed a $108/mo quote against Sharon's $216 Progressive rate — a 50% savings that immediately resonated with a fixed-income customer who opened the call stating she couldn't afford her current payment.</div>
+        <div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"And looking for a quote here for your 2011 Dakota. Is that correct?"</div><div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"try to stay home as much as I possibly can"</div><div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"Have you had an accident or anything like that that made it go up or ticket?"</div>
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Codi Gentle</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">03/25/2026 · value build close</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">14<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $1468</span></div>
+        <div style="font-size:12px;color:var(--dim);line-height:1.55;margin:6px 0"><strong style="color:#a3e4b8">Why it won:</strong> Agent offered multiple tiered price points ($210–$258/mo) and patiently answered every coverage question in detail, including confirming that coverage limits can be adjusted post-bind — building sufficient trust with an uninsured, actively-shopping first-time buyer to close the sale.</div>
+        <div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"Hi, Cody. How you doing? It's Alex here with Allstate... just seems like you're looking for a quote here on a Jeep Cherokee Laredo. Is that correct?"</div><div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"You're the only driver for the vehicle?"</div><div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"And where you currently live, do you currently own or rent?"</div>
+      </div>
+    
+      <div style="background:rgba(34,197,94,.04);border:1px solid rgba(34,197,94,.18);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--green)">Helen Sorensen</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/02/2026</div>
+          </div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--green)">14<span style="font-size:12px;color:var(--dim)">/25</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Quoted: $212/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.15);color:#4ade80">Premium: $1307</span></div>
+        
+        <div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"R. Sorensen. Anyway, the name, my name on my driver's license is actually L-O-W hyphen S-O-R-E-N-S-E-N."</div><div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"And this one's paid in full?"</div><div style="background:rgba(34,197,94,.06);border-left:3px solid var(--green);padding:8px 12px;margin:6px 0 0;font-size:12px;color:#7ee787;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5">"you're also getting a renter's discount, a renter's discount on the policy. It's a better, better bet for you."</div>
+      </div>
+    
+    </div>
+    <div class="wpanel" data-panel="lost" style="display:none">
+      
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Norma Prado</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/02/2026 · Score: 13/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 82/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $191.33/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Current: $245/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">-22% vs current</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"This is Alex with Allstate. We were calling you because it seems like you're looking for..."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Renters as well. Okay."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Norma was a highly engaged buyer — she said 'your price is perfect,' 'I do want to switch over,' and ultimately stated 'I'm gonna go ahead and go with you guys, all right?' at 08:25. Her only real obstacle was a timing/payment concern (just paid AAA, didn't have the extra $197 startup cost at that moment), which won-call data shows a 56% win rate on payment concerns. The Sherie Arnett and Lusiana Tinai won calls both faced similar timing/payment friction and agents overcame it by offering refund</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">huy quach</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/01/2026 · Score: 13/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 82/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $181/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"let's get you switched."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Yes, hi, Patricia. Is Alex here with Allstate? I was giving you a call in regards to an insurance quote."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Huy called back proactively to fine-tune coverage — a textbook buying signal — and made live, affirmative decisions on every option presented: upgraded to 100/300 BI ('Oh okay, we can do that'), kept the 500 deductible ('I'll keep the 500 then'), and selected a UM limit. He never pushed back on price once. The agent then completely abandoned the close, saying 'I'll send this over to your wife and for review' and accepting a 'Okay, bye' as the outcome. Won calls at this agency regularly close on </div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Randi Salmon</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/08/2026 · Score: 18/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 78/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $264/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Can I get your number back? I'm gonna call you because I'm gonna call them."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Seems like you had Allstate at some point."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it — talk path</strong>Randy, I appreciate that — and I agree, for two vehicles plus renters with the bundle discount, $264 is a strong number. Here's what I want to do. You told me Progressive already dropped you and you need to get back on the road today. Instead of waiting until end-of-day and risking something happening in the meantime, let me start you right now. Your effective date is today, I'll email you the ID cards and the full policy breakdown inside of two minutes so you can review everything while we're on the phone, and if anything looks off you can still call me back before 5 PM. Which card are we using — debit or credit?</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Jose Maisonet</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/03/2026 · Score: 11/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 78/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $83/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Current: $120/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">-31% vs current</span></div>
+        
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Jose was an enthusiastic, engaged buyer with a clean record, a 30.83% price savings on the table, and strong buying signals throughout — he asked about the cancellation process, discussed the six-month term, and talked through logistics with his spouse in real time. The only barrier was a classic timing objection ('I already paid this month'), which won calls at this agency have specifically overcome by explaining the prorated refund process. Instead, the agent responded with a weak, easily-dism</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Helen Sorensen</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/02/2026 · Score: 14/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 78/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $212/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"This is Alex with Allstate. We were calling you because it seems like you're looking for..."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Renters as well. Okay."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Helen explicitly said 'Now I'm interested. I actually have pen and paper in hand' after hearing the $212 quote against her ~$300+ AAA rate — a roughly 30% savings that sits squarely in the 'cheaper' price position with a 40% historical win rate. She also verified the contract question ('I wouldn't be wasting my time and your time') showing genuine intent to switch. After that buying signal, the agent let the call dissolve into extended life-story chit-chat about Las Vegas real estate and paperwo</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Edward Taylor</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/10/2026 · Score: 8/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 74/100</div>
+        </div>
+        
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Hi, how are you? It's Alex here with Allstate Insurance, and I can go over your quote with you."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Now, where you live, to your rent?"</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Edward was a highly engaged genuine buyer — he had already shopped multiple carriers and volunteered 'nobody bids your price,' his wife was already on board, and he had a specific, emotional motivation for wanting coverage (a clean 2002 Mercedes CL500 worth $15k he drives daily). The only barrier was a temporary, explicitly time-limited 2-week income dip from workman's comp — precisely the payment concern objection type that won calls overcome at a 56% rate. The agent folded immediately without </div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">LUIS AGUILAR</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/03/2026 · Score: 10/10 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 74/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Current: $138/mo</span></div>
+        
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Luis was a genuine, self-motivated price shopper with a clean driving record who explicitly stated his buying condition ('if you can beat that price') and cooperated fully with discovery, providing his address, vehicle details, and driver count without hesitation. The call was not lost to an objection or price gap — it died entirely because the process failed a customer who had warned twice he was busy: first a prolonged TM-to-closer transfer hold, then a second hold after Luis provided all his </div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Julia Elassal</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/08/2026 · Score: 15/20 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 72/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $194/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Can I get your number back? I'm gonna call you because I'm gonna call them."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Seems like you had Allstate at some point."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Julia was engaged, friendly, disclosed personal info willingly, asked about coverage details, confirmed the price, and gave a clear 2-3 day decision window — all strong buying signals. The agent had a competitive quote ($194/mo full coverage, good student discount applied, zero comp deductible) and good rapport, but completely failed to attempt any close, instead passively scheduling a Friday callback. Won calls show assumptive and needs-based closes work in similar profiles — the agent should h</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Angela Salgado</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/07/2026 · Score: 14/20 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 72/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $96.73/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"What's going on with State Farm at the moment?"</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"it just keeps going up and up and up."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Angela showed clear buying signals — she expressed satisfaction with the price ('I like the price. You give it to me'), confirmed she wanted to proceed, and committed to providing VIN numbers. The call stalled not because she was uninterested but because the agent spent 8+ minutes fumbling a text message exchange instead of simply booking a callback or taking a verbal commitment. Won calls show that customers who explicitly say they like the price and promise to follow through (like Rosher Sebas</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">lynne bottazzo</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/02/2026 · Score: 13/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 72/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $237/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"This is Alex with Allstate. We were calling you because it seems like you're looking for..."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Renters as well. Okay."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Lynne said 'maybe today' when asked about moving forward — a clear buying signal that the agent completely failed to act on. Instead of transitioning into a close (asking for payment info, confirming the effective date, or building urgency), the agent simply emailed the quote and ended the call. Won calls like Rosher Sebastian and Lusiana Tinai show that when a customer expresses same-day intent, agents should immediately move toward binding — not punt to email.</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">CHARLES ODONGO</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/10/2026 · Score: 15/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 68/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $375/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Hi, how are you? It's Alex here with Allstate Insurance, and I can go over your quote with you."</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"Now, where you live, to your rent?"</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Charles was a genuinely motivated buyer — he said 'I'm about to drop them, I don't need them no more' about his current insurer, reacted positively to the $375 quote ('375. That's pretty good'), asked about the down payment (a direct buying signal), and proactively scheduled a callback with his preferred time. The only barrier was logistical: he was in the field without his wallet. The agent failed to create any urgency or offer a concrete same-day path to close, instead passively deferring to M</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Kathleen Werness</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/07/2026 · Score: 14/20 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 68/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $132/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"What's going on with State Farm at the moment?"</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"it just keeps going up and up and up."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Kathleen showed clear buying signals — she acknowledged the quote 'is a little better' than what she's paying, explicitly stated 'I do want to get this taken care of,' and her only barrier was needing to verify her current State Farm rate after removing the second car. The agent had a competitive quote with matching coverages (towing, rental, renters bundle) and a willing customer, but let her walk with a passive follow-up instead of anchoring urgency or helping her resolve the comparison on the</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Mohigul Kabilova</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/07/2026 · Score: 14/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 68/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $84/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"What's going on with State Farm at the moment?"</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"it just keeps going up and up and up."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: The customer was actively price-shopping and had already rejected two worse alternatives — Farmers at $96/mo and Lemonade's bait-and-switch pricing ($56 advertised, $100 actual) — making Allstate's $84/mo liability quote the best legitimate offer she had received. The call ended not on a buying objection but on a purely logistical barrier (at work, VIN not on hand), which the agent passively accepted rather than converting. Won-call patterns show a 57% win rate when customers ask about payment c</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Mohigul Kabilova</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/07/2026 · Score: 14/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 68/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $84/mo</span></div>
+        <div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"What's going on with State Farm at the moment?"</div><div style="background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:8px 12px;margin:6px 0;font-size:12px;color:#fca5a5;font-style:italic;border-radius:0 6px 6px 0;line-height:1.5"><strong style="font-style:normal;color:#ff7b72;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What was said</strong>"it just keeps going up and up and up."</div>
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: The customer was actively price-shopping and had already rejected two worse alternatives — Farmers at $96/mo and Lemonade's bait-and-switch pricing ($56 advertised, $100 actual) — making Allstate's $84/mo liability quote the best legitimate offer she had received. The call ended not on a buying objection but on a purely logistical barrier (at work, VIN not on hand), which the agent passively accepted rather than converting. Won-call patterns show a 57% win rate when customers ask about payment c</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Yinny Chan</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">03/10/2026 · Score: 16/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 68/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $94/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Current: $101/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">-7% vs current</span></div>
+        
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: The agent held a favorable price position (-6.93%, $94 vs. $101 current), which historically wins 40% of the time at this agency — the highest win-rate bracket in the won-call data. Despite being the cheaper option, the call was lost on 'price,' pointing squarely to a failure in objection handling (S4=2/5, the weakest section) rather than a structural disadvantage. A score of 16/25 matches the average won-call profile (15.6/25), confirming the agent had the discovery and value presentation to cl</div>
+      </div>
+    
+      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--red)">Sylvia Garcia</div>
+            <div style="font-size:11px;color:var(--dim);margin-top:2px">04/03/2026 · Score: 13/25 · LOST</div>
+          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);background:rgba(245,158,11,.12);padding:4px 10px;border-radius:6px;border:1px solid rgba(245,158,11,.25)">Winnability 62/100</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0"><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Quoted: $238/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">Current: $260/mo</span><span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#fca5a5">-8% vs current</span></div>
+        
+        <div style="background:rgba(34,197,94,.08);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0 0;font-size:12px;color:#7ee787;line-height:1.55"><strong style="font-style:normal;color:#86efac;font-size:10px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">What could have won it</strong>Based on the call data: Sylvia was engaged, voluntarily disclosed financial context (seniors, retired, low mileage, price-sensitive), and the quote came in cheaper at $238 vs $260 — a price position where won calls close at 40%. The agent had a legitimate path to at least a soft close or commitment but never attempted one, accepting 'I'm going to keep seeing what's out there' without any counter. Won calls at this agency with shopping_around objections have been closed by quantifying annual savings and creating urgency</div>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.winnable-section .wtab').forEach(t => {
+    t.addEventListener('click', () => {
+      const section = t.closest('.winnable-section');
+      section.querySelectorAll('.wtab').forEach(x => {
+        x.style.color = 'var(--dim)';
+        x.style.borderBottomColor = 'transparent';
+      });
+      t.style.color = 'var(--accent)';
+      t.style.borderBottomColor = 'var(--accent)';
+      section.querySelectorAll('.wpanel').forEach(p => {
+        p.style.display = p.dataset.panel === t.dataset.target ? 'block' : 'none';
+      });
+    });
+  });
+})();
+</script>
 
 <!-- Focus -->
 <div class="focus rv">
   <div class="container">
     <div class="sec-title">This Week's Focus</div>
 
-    <div class="focus-card focus-third">
+    <div class="focus-card focus-secondary">
       <div class="focus-num">FOCUS 01</div>
-      <div class="focus-title">Ask the two questions you're skipping</div>
-      <div class="focus-body">Your S2 avg is 2.1 — the lowest section. On most calls you're missing <em>"What are you paying now?"</em> and <em>"Why are you shopping?"</em> These two questions unlock everything downstream. Without them, you can't compare old vs new (S3) or preframe objections (S4). Ask them on every single call.</div>
+      <div class="focus-title">Every quote ends with the card ask</div>
+      <div class="focus-body">Five buyers gave you yes-signals this week — Kathleen (<em>"I want to get this taken care of"</em>), Mckenzie (<em>"I think I could do 150"</em>), Detra (<em>"I do need insurance"</em>), Randi (<em>"one of the best I received"</em>) — and you ended each with callback timing instead of a bind. New rule, non-negotiable: every quote ends with <em>"What card would you like to use, debit or credit?"</em></div>
     </div>
 
     <div class="focus-card focus-primary">
       <div class="focus-num">FOCUS 02</div>
-      <div class="focus-title">Use their words to handle objections</div>
-      <div class="focus-body">Your S4 avg is 3.0 when objections come up — you're responding but not preframing. <em>On the Iliana Ibarra call you used her situation to address concerns before she raised them.</em> That's S4 level 4 (5 pts). Do that by using what they tell you in discovery: their current price, their coverage gaps, their reason for shopping.</div>
+      <div class="focus-title">One alternative for every objection</div>
+      <div class="focus-body">S4 dropped to 2.08 — the largest regression. On Ramazan Turgay you said <em>"this is the only way we're going to process your insurance"</em> twice and then quit. He was saving $12/mo and would have closed with one alternative: secure email link, in-office bind, or mailed check. Memorize the menu. Every objection gets one alternative before you accept no.</div>
     </div>
 
-    <div class="focus-card focus-secondary">
+    <div class="focus-card focus-third">
       <div class="focus-num">FOCUS 03</div>
-      <div class="focus-title">Start closing earlier</div>
-      <div class="focus-body">S5 avg is 2.6 — you're waiting until the end to ask. <em>Start every call with: "If I can save you money with better coverage, is that something you'd want to start today?"</em> Then ask again after quoting. Again after handling objections. 3+ asks across the call = S5 level 5 (7 pts under new rubric).</div>
+      <div class="focus-title">State annual savings BEFORE the customer objects</div>
+      <div class="focus-body">Don't wait for the pushback. Lead with the annual number right after the monthly quote: <em>"Randy, this works out to $X a year less than what you're paying Progressive — and Progressive already dropped you. Let's start you today."</em> You already do great discovery — now use what you learned in S2 as ammunition in S3 before the customer can anchor on the number alone.</div>
     </div>
   </div>
 </div>
@@ -328,9 +782,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 <div class="proof rv">
   <div class="container">
     <div class="proof-card">
-      <div class="proof-title">The Iliana Ibarra Call Proves It</div>
+      <div class="proof-title">The Randi Salmon Call Proves It</div>
       <div class="proof-body">
-        You scored <strong>S4=5 and S5=5</strong> on that call. Perfect objection handling. Perfect closing. <strong>You have the skills — this isn't about ability.</strong> It's about doing it consistently. On 92.3% of your calls, you're not reaching the money zone. Close that gap and your sales will follow. The blueprint is there — you just need to run it every time.
+        You scored <strong>S2=4 and S3=4</strong> on that call — the best discovery-to-presentation pipeline of the week. You also built a <strong>17/25 on Shrawan Chavan</strong> with full bundle math spoken out loud. <strong>You have the skills — this isn't about ability.</strong> It's about finishing what you start. On 95% of your calls, you're not reaching the money zone. Close that gap by asking for the card every time and bringing one alternative to every objection.
       </div>
     </div>
   </div>
@@ -345,7 +799,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   </div>
 </div>
 
-<div class="footer">Road to 25 &middot; March 2026 &middot; Carson Valley Insurance</div>
+<div class="footer">Road to 25 &middot; April 2026 &middot; Carson Valley Insurance</div>
 
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('v');if(el.target.querySelector('.money-ring'))setTimeout(()=>el.target.querySelector('.money-ring').classList.add('animated'),200)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
